@@ -51,4 +51,12 @@ $app->get('/collocation/', function() {
     (new collocation\controleurs\ControleurGestion())->afficherGroupe();
 })->name("collocation");
 
+$app->get('/', function() {
+    (new collocation\controleurs\ControleurGestion())->afficherGroupe();
+})->name("deconnexion"); // TODO
+
+$app->get('/creerCollocation/', function() {
+    (new collocation\controleurs\ControleurGestion())->creerGroupe();
+})->name("creerCollocation");
+
 $app->run();

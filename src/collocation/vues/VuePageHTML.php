@@ -40,16 +40,31 @@ end;
         $app = \Slim\Slim::getInstance();
         $r_logements = $app->urlFor("logements");
         $r_membre = $app->urlFor("membres");
-        $r_coloc = $app->urlFor("collocation");
+        $r_aff_coloc = $app->urlFor("collocation");
+        $r_creer_coloc = $app->urlFor("creerCollocation");
+        $r_deconnexion = $app->urlFor("deconnexion");
         $r_accueil = $app->urlFor("accueil");
+
+        if(isset($_SESSION['email'])){
+            $connexion = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_deconnexion\">Se connecter</a>";
+        }else{
+            $connexion = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_accueil\">Se connecter</a>
+    <a class=\"waves-effect waves-light btn-large\" href=\"$r_accueil\">S'inscrire</a>";
+        }
+
+        if(isset($_SESSION['idGroupe'])){
+            $groupe = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_aff_coloc\">Ma coloc'</a>";
+        }else{
+            $groupe = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_creer_coloc\">Créer une collocation</a>";
+        }
+
         return <<<end
 <div class="menu">
     <img src="logo.png" height="20%" width="20%">
     <a class="waves-effect waves-light btn-large" href="$r_logements">Nos logements</a>
     <a class="waves-effect waves-light btn-large" href="$r_membre">Nos membres</a>
-    <a class="waves-effect waves-light btn-large" href="$r_coloc">Ma coloc'</a>
-    <a class="waves-effect waves-light btn-large" href="$r_accueil">Se connecter</a>
-    <a class="waves-effect waves-light btn-large" href="$r_accueil">S'inscrire</a>
+    $groupe
+    $connexion
 </div>
 end;
 
