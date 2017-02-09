@@ -36,9 +36,10 @@ class ControleurGestion
         if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
             $user = User::where("email","=",$_SESSION['email'])->first();
             if($user->estGestionnaire()){ // deja gerant
-                $valeur = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
-                $vue = new VueNavigation($valeur);
-                //print $vue-> render(VueGestion::AFF_GROUPE);  // NOT YET IMPLEMENTED
+                $groupe = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
+                $users = $groupe->users();
+                $vue = new VueNavigation(array($groupe,$users));
+                print $vue-> render(VueGestion::AFF_GROUPE);  // NOT YET IMPLEMENTED
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
                 $app->redirect("accueil");
