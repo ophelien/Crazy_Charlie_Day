@@ -13,7 +13,7 @@ class ControleurGestion
             $user = User::where("email","=",$_SESSION['email'])->first();
             if($user->estGestionnaire()){ // deja gerant
                 $app = \Slim\Slim::getInstance();
-                $app->redirect("accueil");
+                $app->redirect($app->urlFor("accueil"));
             }else{ // pas encore gerant
                 $groupe = new Groupe();
                 $groupe->status = 0;
@@ -29,7 +29,7 @@ class ControleurGestion
             }
         }else{ // utilisateur inconnu
             $app = \Slim\Slim::getInstance();
-            $app->redirect("accueil");
+            $app->redirect($app->urlFor("accueil"));
         }
     }
 
@@ -43,11 +43,11 @@ class ControleurGestion
                 print $vue-> render(VueGestion::AFF_GROUPE);  // NOT YET IMPLEMENTED
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
-                $app->redirect("accueil");
+                $app->redirect($app->urlFor("accueil"));
             }
         }else{ // utilisateur inconnu
             $app = \Slim\Slim::getInstance();
-            $app->redirect("accueil");
+            $app->redirect($app->urlFor("accueil"));
         }
     }
 

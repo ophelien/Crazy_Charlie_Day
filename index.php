@@ -29,18 +29,22 @@ $app->post('/', function() {
 
 $app->get('/utilisateur/', function() {
     (new collocation\controleurs\ControleurNavigation())->afficherListeUtilisateurs();
-});
+})->name("membres");
 
 $app->get('/utilisateur/:email', function($email) {
     (new collocation\controleurs\ControleurNavigation())->afficherUtilisateur($email);
-});
+})->name("membre");
 
 $app->get('/logement/', function() {
     (new collocation\controleurs\ControleurNavigation())->afficherListeLogement();
-});
+})->name("logements");
 
 $app->get('/logement/:id', function($id) {
     (new collocation\controleurs\ControleurNavigation())->afficherLogement($id);
-});
+})->name("logement");
+
+$app->get('/collocation/', function() {
+    (new collocation\controleurs\ControleurGestion())->afficherGroupe();
+})->name("collocation");
 
 $app->run();

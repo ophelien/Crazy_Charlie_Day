@@ -22,6 +22,7 @@ class VueNavigation
         switch ($selecteur) {
             case VueNavigation::AFF_INDEX :
                 $content = $this->index();
+                return VuePageHTML::getHeaders().$content.VuePageHTML::getFooter();
                 break;
             case VueNavigation::AFF_LISTE_UTILISATEUR :
                 $content = $this->listeUtilisateur();
@@ -30,7 +31,7 @@ class VueNavigation
                 $content = $this->listeLogement();
                 break;
         }
-        return VuePageHTML::getHeaders().$content.VuePageHTML::getFooter();
+        return VuePageHTML::getHeaders().VuePageHTML::getMenu().$content.VuePageHTML::getFooter();
     }
 
     private function listeUtilisateur(){

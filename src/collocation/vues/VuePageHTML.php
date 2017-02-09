@@ -37,14 +37,19 @@ end;
     }
 
     public static function getMenu(){
+        $app = \Slim\Slim::getInstance();
+        $r_logements = $app->urlFor("logements");
+        $r_membre = $app->urlFor("membres");
+        $r_coloc = $app->urlFor("collocation");
+        $r_accueil = $app->urlFor("accueil");
         return <<<end
 <div class="menu">
     <img src="logo.png" height="20%" width="20%">
-    <a class="waves-effect waves-light btn-large">Nos logements</a>
-    <a class="waves-effect waves-light btn-large">Nos membres</a>
-    <a class="waves-effect waves-light btn-large">Ma coloc'</a>
-    <a class="waves-effect waves-light btn-large">Se connecter</a>
-    <a class="waves-effect waves-light btn-large">S'inscrire</a>
+    <a class="waves-effect waves-light btn-large" href="$r_logements">Nos logements</a>
+    <a class="waves-effect waves-light btn-large" href="$r_membre">Nos membres</a>
+    <a class="waves-effect waves-light btn-large" href="$r_coloc">Ma coloc'</a>
+    <a class="waves-effect waves-light btn-large" href="$r_accueil">Se connecter</a>
+    <a class="waves-effect waves-light btn-large" href="$r_accueil">S'inscrire</a>
 </div>
 end;
 
