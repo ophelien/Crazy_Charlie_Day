@@ -15,18 +15,33 @@ class VueGestionnaire
 
     public function __construct($array = null)
     {
-        $this->objet =$array;
+        $this->objet = $array;
     }
 
-    private function afficherTousLesGroupe(){
+    private function afficherTousLesGroupe()
+    {
         $app = \Slim\Slim::getInstance();
         $retour = "";
-        foreach($this->objet as $groupe){
+        foreach ($this->objet as $groupe) {
             $retour .= <<<end
 <p>$groupe->idGroupe</p>
 <p>$groupe->idLogement</p>
 end;
 
+        }
+        return $retour;
+    }
+
+    private function afficherDetailsGroupe()
+    {
+        $app = \Slim\Slim::getInstance();
+        $retour = "";
+        foreach ($this->objet as $groupe) {
+            $retour .= <<< end
+   <p>$groupe->idGroupe</p>
+   <p>$groupe->idLogement</p>
+   <p>$groupe->status</p>
+end;
         }
         return $retour;
     }
