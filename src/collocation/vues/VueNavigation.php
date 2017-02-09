@@ -31,8 +31,9 @@ class VueNavigation
         $retour = "";
         foreach($this->objet as $utilisateur){
             $retour .= <<<end
+<img src=$utilisateur->email.png>
 <p>$utilisateur->nom</p>
-<href="">
+<a href="">Details</a>
 end;
         }
         return $retour;
