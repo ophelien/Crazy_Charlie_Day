@@ -58,8 +58,21 @@ end;
         $retour = "";
         foreach($this->objet as $logement){
             $retour.=<<<end
-<img src="$logement->idLogement">
-<p>Nombre de place(s): $logement->places</p>
+<div class="row">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img src=$logement->idlogement.png>
+            </div>
+            <div class="card-content">
+                <p><b>Nombre de places : $logement->places personnes</b></p>
+            </div>
+            <div class="card-action">
+                <a href="#">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
 end;
         }
         return $retour;
