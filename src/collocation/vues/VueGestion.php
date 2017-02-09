@@ -37,7 +37,7 @@ class VueGestion
         $content = "";
         switch ($selecteur) {
             case VueGestion::AFF_ERR :
-                $content .= "<div class='red_text'>Erreur : Le logement choisi n'est pas assez grand</div>";
+                $content .= "<div class='red-text'>Erreur : Le logement choisi n'est pas assez grand</div>";
                 break;
             case VueGestion::AFF_CREATION :
                 $content .= "<div class='message'>Le groupe a bien été créé</div>";
@@ -46,16 +46,16 @@ class VueGestion
                 $content .= "<div class='message'>Le membre a bien été ajouté au groupe</div>";
                 break;
             case VueGestion::AFF_ERR_AJOUT :
-                $content .= "<div class='red_text'>Erreur : Le membre n'a pas été ajouté au groupe</div>";
+                $content .= "<div class='red-text'>Erreur : Le membre n'a pas été ajouté au groupe</div>";
                 break;
             case VueGestion::AFF_ERR_STATUS :
-                $content .= "<div class='red_text'>Erreur : Le groupe à déjà un logement</div>";
+                $content .= "<div class='red-text'>Erreur : Le groupe à déjà un logement</div>";
                 break;
             case VueGestion::AFF_STATUS :
                 $content .= "<div class='message'>Le groupe possède un nouveau logement</div>";
                 break;
             case VueGestion::AFF_ERR_LOGEMENT :
-                $content .= "<div class='red_text'>Erreur : Le logement n'a pas assez de place</div>";
+                $content .= "<div class='red-text'>Erreur : Le logement n'a pas assez de place</div>";
                 break;
             case VueGestion::AFF_LOGEMENT :
                 $content .= "<div class='message'>Le logement a été ajouté</div>";
@@ -67,7 +67,7 @@ class VueGestion
                 $content .= "<div class='message'>L'utilisateur a été supprimé</div>";
                 break;
             case VueGestion::AFF_ERR_NO_LOGEMENT :
-                $content .= "<div class='red_text'>Erreur : Il n'y a pas de logement</div>";
+                $content .= "<div class='red-text'>Erreur : Il n'y a pas de logement</div>";
                 break;
         }
         $content .= $this->afficherGroupe();
