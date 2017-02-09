@@ -21,8 +21,8 @@ class ControleurGestion
             $_SESSION['invitationValide'] = $appartient->estOk;
             $this->afficherInvitation();
         }else {
-            $app = \Slim\Slim::getInstance();
-            $app->redirect($app->urlFor("accueil"));
+            //$app = \Slim\Slim::getInstance();
+            //$app->redirect($app->urlFor("accueil"));
         }
     }
 
