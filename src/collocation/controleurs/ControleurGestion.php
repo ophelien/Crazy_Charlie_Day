@@ -108,7 +108,7 @@ class ControleurGestion
                     if($place->places >= $groupe->nbMembre()){ // s'il y a assez de places
                         $groupe->idLogement = $idlogem;
                         $groupe->save();
-                        $this->afficherGroupe(VueGestion::STATUS);
+                        $this->afficherGroupe(VueGestion::AFF_STATUS);
                     }
                 }
                 $this->afficherGroupe(VueGestion::AFF_ERR_STATUS);
