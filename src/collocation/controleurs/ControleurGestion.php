@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\App;
 class ControleurGestion
 {
     public function invitation($url){
-        $appartient = Appartient::where("urlInvitation","=",$url);
+        $appartient = Appartient::where("urlInvitation","=",$url)->first();
         if($appartient != null && !isset($_SESSION['email'])) {
             $user = User::where("email","=",$appartient->email);
             $_SESSION['invitation'] = $user->email;
