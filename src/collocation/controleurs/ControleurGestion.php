@@ -27,7 +27,7 @@ class ControleurGestion
                 $appartient->urlGestion = $this->genererToken();
                 $appartient->save();
                 $_SESSION['idGroupe'] = $groupe->idGroupe;
-                $this->afficherGroupe(VueGestion::AFF_ERR);
+                $this->afficherGroupe(VueGestion::AFF_CREATION);
             }
         }else{
             $app = \Slim\Slim::getInstance();
@@ -35,7 +35,7 @@ class ControleurGestion
         }
     }
 
-    public function afficherGroupe(){
+    public function afficherGroupe($arg = null){
         if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
             $user = User::where("email","=",$_SESSION['email'])->first();
             if($user->estGestionnaire()){ // deja gerant
@@ -50,7 +50,7 @@ class ControleurGestion
                 }
                 $users = $groupe->users();
                 $vue = new VueGestion(array($groupe,$users,$lieu,$possible));
-                print $vue-> render(VueGestion::AFF_ERR);  // NOT YET IMPLEMENTED
+                print $vue-> render($arg);
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
                 $app->redirect($app->urlFor("accueil"));
@@ -129,7 +129,7 @@ class ControleurGestion
                 $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe'])->first();
                 $logement = Logement::where('idLogement','=',$groupe->idLogement)->first();
                 if($groupe->idLogement != null){ //si le logement est bien affecté
-                    if($groupe->nbMembre()=== $logement->places){ // et si le logement a la taille exacte du groupe
+                    if($groupe->nbMembre()== $logement->places){ // et si le logement a la taille exacte du groupe
                        $groupe->status=1;
                        $groupe->save();
                         $appartients = Appartient::where("idGroupe","=",$_SESSION['idGroupe'])->get();
@@ -163,4 +163,14 @@ class ControleurGestion
         return $token;
     }
 
+    public function supprimerBien(){
+        $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe'])->first();
+        $groupe->idLogement = null;
+        $groupe->save();
+    }
+
+    public function supprimerUser($emailUser){
+        $appart = Appartient::where('email', '=', $emailUser)->where('idGroupe','=',$_SESSION['idGroupe'])->first();
+        $appart->delete();
+    }
 }
