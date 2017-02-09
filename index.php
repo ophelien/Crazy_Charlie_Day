@@ -16,4 +16,5 @@ $app = new \Slim\Slim;
 
 $app->get('/', function(){
     $URI = \Slim\Slim::getInstance()->request->getRootUri();
+    
 });
