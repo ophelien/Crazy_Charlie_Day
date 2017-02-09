@@ -44,7 +44,7 @@ class VueNavigation
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/user/$utilisateur->email.jpg>
+                <img src=/img/user/$utilisateur->email.jpg>
             </div>
             <div class="card-content">
                 <p><b>$utilisateur->nom</b></p>
@@ -68,7 +68,7 @@ end;
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/apart/$logement->idLogement.jpg>
+                <img src=/img/apart/$logement->idLogement.jpg>
             </div>
             <div class="card-content">
                 <p><b>Nombre de places : $logement->places personnes</b></p>
@@ -93,7 +93,7 @@ end;
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/user/$value1.jpg>
+                <img src=/img/user/$value1.jpg>
             </div>
             <div class="card-content">
                 <p><b>$value2/b></p>
@@ -119,7 +119,7 @@ end;
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/user/$value1.jpg>
+                <img src=/img/user/$value1.jpg>
             </div>
             <div class="card-content">
                 <p><b>Nombre de places : $value2 personnes</b></p>
@@ -143,7 +143,7 @@ end;
         return <<<end
 <a class="waves-effect waves-light btn grey" href=""><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
 <div class="test">
-<img class ="img" src="img/logo.png " height ="40%" width = "40%">
+<img class ="img" src="/img/logo.png " height ="40%" width = "40%">
 <div class="row">
     <form class="for" method="POST" action="$this->URI/inscription">
         <div class="row">
