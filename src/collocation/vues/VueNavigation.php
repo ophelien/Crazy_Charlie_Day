@@ -85,16 +85,18 @@ end;
     }
 
     private function detailUtilisateur(){
+        $value1 = $this->objet->email;
+        $value2 = $this->objet->nom;
             return <<<end
 <div class="detailU">
 <div class="row">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/user/$this->objet->email.jpg>
+                <img src=img/user/$value1.jpg>
             </div>
             <div class="card-content">
-                <p><b>$this->objet->nom</b></p>
+                <p><b>$value2/b></p>
             </div>
             <div class="card-action">
                 <a href="#">Details</a>
@@ -109,16 +111,18 @@ end;
 
 
     private function detailLogement(){
+        $value1 = $this->objet->idLogement;
+        $value2 = $this->objet->places;
         return <<<end
 <div class="detailU">
 <div class="row">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/user/$this->objet->idLogement.jpg>
+                <img src=img/user/$value1.jpg>
             </div>
             <div class="card-content">
-                <p><b>Nombre de places : $this->objet->places personnes</b></p>
+                <p><b>Nombre de places : $value2 personnes</b></p>
             </div>
             <div class="card-action">
                 <a href="#">Details</a>
