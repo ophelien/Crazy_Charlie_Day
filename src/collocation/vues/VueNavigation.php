@@ -13,12 +13,10 @@ class VueNavigation
     const AFF_LOGEMENT = 5;
 
     private $objet;
-    public $URI;
 
     public function __construct($array = null)
     {
         $this->objet = $array;
-        $this->URI = \Slim\Slim::getInstance()->request->getRootUri();
     }
 
     public function render($selecteur)
@@ -116,7 +114,6 @@ end;
 end;
     }
 
-
     private function detailLogement(){
         $value1 = $this->objet->idLogement;
         $value2 = $this->objet->places;
@@ -140,17 +137,17 @@ end;
 end;
     }
 
-
-
-
-
     private function index(){
+        $app = \Slim\Slim::getInstance();
+        $r_inscription = $app->urlFor("inscription");
+        $r_connexion = $app->urlFor("identification");
+        $r_logements = $app->urlFor("logements");
         return <<<end
-<a class="waves-effect waves-light btn grey" href=""><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
+<a class="waves-effect waves-light btn grey" href="$r_logements"><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
 <div class="test">
 <img class ="img" src="/img/logo.png " height ="40%" width = "40%">
 <div class="row">
-    <form class="for" method="POST" action="$this->URI/inscription">
+    <form class="for" method="POST" action="$r_inscription">
         <div class="row">
             <div class="input-field">
                 <input placeholder="ex : Dupont"  type="text" name="nom" required>
@@ -172,7 +169,7 @@ end;
         <button type="submit">Je m'inscris</button>
         <a class="waves-effect waves-light btn green" href="">S'inscrire gratuitement</a>
     </form>
-    <form class="for">
+    <form class="for" metho="POST" action="$r_connexion">
         <div class="row">
             <div class="input-field">
                 <input placeholder="ex : Dupont@gmail.com" type="text">

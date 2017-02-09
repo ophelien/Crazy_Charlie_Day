@@ -21,7 +21,7 @@ $app->get('/', function(){
 
 $app->post('/inscription/', function(){
     (new collocation\controleurs\ControleurNavigation())->inscription();
-});
+})->name("inscription");
 
 $app->get('/identification/', function() {
     (new collocation\controleurs\ControleurNavigation())->saisirLogin();
