@@ -156,6 +156,7 @@ end;
 <div class="test">
 <img class ="img" src="/img/logo.png " height ="40%" width = "40%">
     $mess
+    
 <div class="row">
 
     <form id="formulaire_inscription" class="for" method="POST" action="$r_inscription">
