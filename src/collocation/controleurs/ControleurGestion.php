@@ -56,8 +56,10 @@ class ControleurGestion
                 $logement = Logement::select("places")->where('idlogement',"=","$groupe->idLogement")->get();
                 if($groupe->nbMembre() < $logement){//si y a de la place dans le logement
                     $appartient = new Appartient();
-                    $appartient->idUser = $gens->id;
+                    $appartient->email = $gens;
                     $appartient ->idGroupe = $_SESSION['idGroupe'];
+                    $appartient->estOk = 0;
+                    $appartient->urlGestion = null;
                     $appartient->save();
                 }
             }else{ // pas encore gerant
@@ -75,9 +77,9 @@ class ControleurGestion
             $user = User::where("email","=",$_SESSION['email'])->first();
             if($user->estGestionnaire()){ // deja gerant
                 $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe']);
-                $logement = $groupe->idLogement;
                 if($logement == null){
-                    $groupe->idLogement = $logement->idLogement;
+                    $groupe->idLogement = $logement;
+                    $groupe->save();
                 }
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
