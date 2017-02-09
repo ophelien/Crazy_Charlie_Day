@@ -3,9 +3,8 @@
 namespace collocation\models;
 
 class User extends \Illuminate\Database\Eloquent\Model {
-
     protected $table = "user";
-    protected $primaryKey = "id";
+    protected $primaryKey = "email";
     public $timestamps = false;
 }
 

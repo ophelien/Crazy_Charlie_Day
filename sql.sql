@@ -2,13 +2,38 @@
 /*!40101 SET NAMES utf8 */;
 
 CREATE TABLE IF NOT EXISTS `logement` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idLogement` int(11) NOT NULL AUTO_INCREMENT,
   `places` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`idLogement`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
+CREATE TABLE IF NOT EXISTS `user` (
+  `email` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `nom` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `message` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
-INSERT INTO `logement` (`id`, `places`) VALUES
+CREATE TABLE IF NOT EXISTS `groupe` (
+  `idGroupe` int(11) NOT NULL AUTO_INCREMENT,
+  `estValidee` int(1) NOT NULL DEFAULT 0,
+  `idLogement` int(11),
+  CONSTRAINT FK_groupe_logement FOREIGN KEY (idLogement) REFERENCES `logement`(idLogement),
+  PRIMARY KEY (`idGroupe`)
+);
+
+CREATE TABLE IF NOT EXISTS `appartient` (
+  `email` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `idGroupe` int(11) NOT NULL,
+  `urlGestion` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `urlInvitation` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `estOk` int(1) NOT NULL DEFAULT 0,
+  CONSTRAINT FK_appartient_groupe FOREIGN KEY (idGroupe) REFERENCES `groupe`(idGroupe),
+  CONSTRAINT FK_appartient_user FOREIGN KEY (email) REFERENCES `user`(email),
+  PRIMARY KEY (`email`,`idGroupe`)
+);
+
+INSERT INTO `logement` (`idLogement`, `places`) VALUES
 (1, 3),
 (2, 3),
 (3, 4),
@@ -35,42 +60,33 @@ INSERT INTO `logement` (`id`, `places`) VALUES
 (24, 3),
 (25, 3);
 
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `message` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
-
-
-INSERT INTO `user` (`id`, `nom`, `message`) VALUES
-(1, 'Jeanne', 'aime la musique ♫'),
-(2, 'Paul', 'aime cuisiner ♨ ♪'),
-(3, 'Myriam', 'mange Halal ☪'),
-(4, 'Nicolas', 'ouvert à tous ⛄'),
-(5, 'Sophie', 'aime sortir ♛'),
-(6, 'Karim', 'aime le soleil ☀'),
-(7, 'Julie', 'apprécie le calme ☕'),
-(8, 'Etienne', 'accepte jeunes et vieux ☯'),
-(9, 'Max', 'féru de musique moderne ☮'),
-(10, 'Sabrina', 'aime les repas en commun ⛵☻'),
-(11, 'Nathalie', 'bricoleuse ⛽'),
-(12, 'Martin', 'sportif ☘ ⚽ ⚾ ⛳'),
-(13, 'Manon', ''),
-(14, 'Thomas', ''),
-(15, 'Léa', ''),
-(16, 'Alexandre', ''),
-(17, 'Camille', ''),
-(18, 'Quentin', ''),
-(19, 'Marie', ''),
-(20, 'Antoine', ''),
-(21, 'Laura', ''),
-(22, 'Julien', ''),
-(23, 'Pauline', ''),
-(24, 'Lucas', ''),
-(25, 'Sarah', ''),
-(26, 'Romain', ''),
-(27, 'Mathilde', ''),
-(28, 'Florian', '');
+INSERT INTO `user` (`email`, `nom`, `message`) VALUES
+('jeanne@gmail.com', 'Jeanne', 'aime la musique ♫'),
+('paul@gmail.com', 'Paul', 'aime cuisiner ♨ ♪'),
+('myriam@gmail.com', 'Myriam', 'mange Halal ☪'),
+('nicolas@gmail.com', 'Nicolas', 'ouvert à tous ⛄'),
+('sophie@gmail.com', 'Sophie', 'aime sortir ♛'),
+('karim@gmail.com', 'Karim', 'aime le soleil ☀'),
+('julie@gmail.com', 'Julie', 'apprécie le calme ☕'),
+('etienne@gmail.com', 'Etienne', 'accepte jeunes et vieux ☯'),
+('max@gmail.com', 'Max', 'féru de musique moderne ☮'),
+('sabrina@gmail.com', 'Sabrina', 'aime les repas en commun ⛵☻'),
+('nathalie@gmail.com', 'Nathalie', 'bricoleuse ⛽'),
+('martin@gmail.com', 'Martin', 'sportif ☘ ⚽ ⚾ ⛳'),
+('manon@gmail.com', 'Manon', ''),
+('thomas@gmail.com', 'Thomas', ''),
+('lea@gmail.com', 'Léa', ''),
+('alexandre@gmail.com', 'Alexandre', ''),
+('camille@gmail.com', 'Camille', ''),
+('quentin@gmail.com', 'Quentin', ''),
+('marin@gmail.com', 'Marie', ''),
+('antoine@gmail.com', 'Antoine', ''),
+('laura@gmail.com', 'Laura', ''),
+('julien@gmail.com', 'Julien', ''),
+('pauline@gmail.com', 'Pauline', ''),
+('lucas@gmail.com', 'Lucas', ''),
+('sarah@gmail.com', 'Sarah', ''),
+('romain@gmail.com', 'Romain', ''),
+('mathilde@gmail.com', 'Mathilde', ''),
+('florian@gmail.com', 'Florian', '');
 
