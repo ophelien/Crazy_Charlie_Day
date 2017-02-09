@@ -97,6 +97,7 @@ end;
     private function detailUtilisateur(){
         $value1 = $this->objet->email;
         $value2 = $this->objet->nom;
+        $value3 = $this->objet->message;
             return <<<end
 <div class="detailU">
     <div class="col s12 m7">
@@ -106,6 +107,7 @@ end;
             </div>
             <div class="card-content">
                 <p><b>$value2</b></p>
+                <p>$value3</p>
             </div>
              <div class="card-action">
                 <a href="#">Ajouter cette personne à ma coloc'</a>
