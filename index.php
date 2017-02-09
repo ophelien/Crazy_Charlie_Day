@@ -76,4 +76,4 @@ END;
 echo $html;
 });
 
-$app->start();
+$app->run();
