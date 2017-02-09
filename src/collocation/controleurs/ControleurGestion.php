@@ -19,10 +19,15 @@ class ControleurGestion
             $_SESSION['invitation'] = $user->email;
             $_SESSION['invitationId'] = $appartient->id;
             $_SESSION['invitationValide'] = $appartient->estOk;
-            $this->afficherInvitation();
+            $groupe = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
+            $lieu = Logement::where("idLogement","=",$groupe->idLogement)->first();
+
+            $users = $groupe->users();
+            $vue = new VueInvitation(array($groupe,$users,$lieu));
+            print $vue-> render();
         }else {
-            //$app = \Slim\Slim::getInstance();
-            //$app->redirect($app->urlFor("accueil"));
+            $app = \Slim\Slim::getInstance();
+            $app->redirect($app->urlFor("accueil"));
         }
     }
 
