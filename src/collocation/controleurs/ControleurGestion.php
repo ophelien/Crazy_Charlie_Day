@@ -24,6 +24,7 @@ class ControleurGestion
                 $appartient->estOk = 1;
                 $appartient->urlGestion = ""; // TODO
                 $appartient->save();
+                $_SESSION['idGroupe'] = $groupe->idGroupe;
                 $this->afficherGroupe();
             }
         }else{ // utilisateur inconnu
