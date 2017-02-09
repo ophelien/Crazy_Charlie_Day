@@ -18,3 +18,5 @@ $app->get('/', function(){
     $URI = \Slim\Slim::getInstance()->request->getRootUri();
     
 });
+
+$app->start();
