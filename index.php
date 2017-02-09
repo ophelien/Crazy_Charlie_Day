@@ -91,4 +91,8 @@ $app->get('/supprimerUserColloc/:email', function($email) {
     (new collocation\controleurs\ControleurGestion())->supprimerUser($email);
 })->name("supprimerUserColloc");
 
+$app->get('/logementsCompatibles/', function(){
+    (new collocation\controleurs\ControleurNavigation())->listerLogementCompatible();
+})->name("logementsCompatibles");
+
 $app->run();
