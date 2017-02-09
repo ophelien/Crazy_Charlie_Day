@@ -70,7 +70,7 @@ end;
 
     private function listeLogement(){
         $app = \Slim\Slim::getInstance();
-        $retour = '<a href="" class=\"waves - effect waves - light btn green\\">Afficher les logements compatibles avec ma Coloc</a>';
+        $retour = '<a href="" class="waves - effect waves - light btn green">Afficher les logements compatibles avec ma Coloc</a>';
         foreach($this->objet as $logement){
             $r_details = $app->urlFor("logement",array("id" => $logement->idLogement));
             $retour.=<<<end
