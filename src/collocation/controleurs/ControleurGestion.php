@@ -108,7 +108,7 @@ class ControleurGestion
                     if($place->places >= $groupe->nbMembre()){ // s'il y a assez de places
                         $groupe->idLogement = $idlogem;
                         $groupe->save();
-                        $this->afficherGroupe(VueGestion::STATUS);
+                        $this->afficherGroupe(VueGestion::AFF_STATUS);
                     }
                 }
                 $this->afficherGroupe(VueGestion::AFF_ERR_STATUS);
@@ -167,10 +167,28 @@ class ControleurGestion
         $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe'])->first();
         $groupe->idLogement = null;
         $groupe->save();
+        $this->afficherGroupe(VueGestion::AFF_SUPPRESSION_LOGEMENT);
     }
 
     public function supprimerUser($emailUser){
-        $appart = Appartient::where('email', '=', $emailUser)->where('idGroupe','=',$_SESSION['idGroupe'])->first();
-        $appart->delete();
+        Appartient::where('email', '=', $emailUser)->where('idGroupe','=',$_SESSION['idGroupe'])->delete();
+        $this->afficherGroupe(VueGestion::AFF_SUPPRESSION_USER);
+    }
+
+    public function listerLogementCompatible(){
+        if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
+            $user = User::where("email","=",$_SESSION['email'])->first();
+            if($user->estGestionnaire()){ // deja gerant
+               $app=Appartient::where('email','=',$user->email)->first();
+               $groupe=Groupe::where('idGroupe','=',$app->idgroupe())->first;
+               $log=Logement::where('places','=',$groupe->nbMembre());
+            }else{ // pas encore gerant
+                $app = \Slim\Slim::getInstance();
+                $app->redirect($app->urlFor("accueil"));
+            }
+        }else{ // utilisateur inconnu
+            $app = \Slim\Slim::getInstance();
+            $app->redirect($app->urlFor("accueil"));
+        }
     }
 }

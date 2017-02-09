@@ -22,6 +22,8 @@ class VueGestion
     const AFF_ERR_LOGEMENT = 7;
     const AFF_LOGEMENT = 8;
     const AFF_ERR_NO_LOGEMENT = 9;
+    const AFF_SUPPRESSION_LOGEMENT = 10;
+    const AFF_SUPPRESSION_USER = 11;
 
     private $objet;
 
@@ -56,7 +58,13 @@ class VueGestion
                 $content .= "<div class='red'>Erreur : Le logement n'a pas assez de place</div>";
                 break;
             case VueGestion::AFF_LOGEMENT :
-                $content .= "<div class='message'>Le logement a assez de place</div>";
+                $content .= "<div class='message'>Le logement a été ajouté</div>";
+                break;
+            case VueGestion::AFF_SUPPRESSION_LOGEMENT :
+                $content .= "<div class='message'>Le logement a été supprimé</div>";
+                break;
+            case VueGestion::AFF_SUPPRESSION_USER :
+                $content .= "<div class='message'>L'utilisateur a été supprimé</div>";
                 break;
             case VueGestion::AFF_ERR_NO_LOGEMENT :
                 $content .= "<div class='red'>Erreur : Il n'y a pas de logement</div>";
