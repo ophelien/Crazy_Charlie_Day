@@ -38,7 +38,7 @@ class VueNavigation
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/user/$utilisateur->email.png>
+                <img src=img/user/$utilisateur->email.jpg>
             </div>
             <div class="card-content">
                 <p><b>$utilisateur->nom</b></p>
