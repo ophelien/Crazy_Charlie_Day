@@ -44,7 +44,7 @@ end;
         $r_accueil = $app->urlFor("accueil");
         return <<<end
 <div class="menu">
-    <img src="logo.png" height="20%" width="20%">
+    <img src="img/logo.png" height="20%" width="20%">
     <a class="waves-effect waves-light btn-large" href="$r_logements">Nos logements</a>
     <a class="waves-effect waves-light btn-large" href="$r_membre">Nos membres</a>
     <a class="waves-effect waves-light btn-large" href="$r_coloc">Ma coloc'</a>
