@@ -28,3 +28,14 @@ form.for{
 	display : inline-block;
 	vertical-align : middle;
 }
+
+div.menu{
+	background-color : green;
+	padding-bottom : 1%;
+}
+
+a.btn-large{
+	background-color : white;
+	color : green;
+	width : 15%;
+}
