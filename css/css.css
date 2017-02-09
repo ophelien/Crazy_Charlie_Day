@@ -1,15 +1,29 @@
-footer{
-background:#ccc;
-position:absolute;
-bottom:0;
-width:100%;
-padding-top:50px;
+
+div.test{
+	position: relative;
+	width : 100%;
+	margin-bottom : 3%;
+
+}
+body{
+	width:100%;
+	margin:auto;
+	text-align : center;
 
 }
 
-header{
-	text-align :  center;
-	background : grey;
-	padding : 5%;
+div.row{
+	width : 65%;
+}
 
+html{
+
+	background:url(stan.jpg)no-repeat center center fixed;
+	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+	background-size: cover;
+}
+
+form.for{
+	width : 45%;
+	display : inline-block;
 }
