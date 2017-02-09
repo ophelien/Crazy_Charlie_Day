@@ -169,5 +169,12 @@ class ControleurNavigation
         
     }
 
-
+    public function modifierInformationPerso($nom, $desc){
+        if(isset($_SESSION['email'])){
+            $gens = User::where('email','=',$_SESSION['email']);
+            $gens->nom=$nom;
+            $gens->description=$desc;
+            $gens->save();
+        }
+    }
 }
