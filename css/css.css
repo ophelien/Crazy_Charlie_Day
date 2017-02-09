@@ -16,6 +16,12 @@ div.row{
 	width : 65%;
 }
 
+div.lis{
+	display : inline-block;
+	width : 40%;
+
+}
+
 html{
 
 	background:url(/img/stan.jpg)no-repeat center center fixed;

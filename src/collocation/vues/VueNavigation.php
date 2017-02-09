@@ -50,7 +50,7 @@ class VueNavigation
         foreach($this->objet as $utilisateur){
             $r_details = $app->urlFor("membre",array("email" => $utilisateur->email));
             $retour .= <<<end
-<div class="row">
+<div class="lis">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
@@ -76,7 +76,7 @@ end;
         foreach($this->objet as $logement){
             $r_details = $app->urlFor("logement",array("id" => $logement->idLogement));
             $retour.=<<<end
-<div class="row">
+<div class="lis">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
