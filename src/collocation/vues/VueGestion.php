@@ -28,16 +28,19 @@ class VueGestion
                 $content = $this->afficherGroupe();
                 break;
         }
-        return VuePageHTML::getHeaders().$content.VuePageHTML::getFooter();
-
+        return VuePageHTML::getHeaders() . $content . VuePageHTML::getFooter();
+    }
 
         private function afficherGroupe(){
         $retour = "";
+        $log = $this->objet[0];
+            $retour.=<<<end
+<p>logement associé $log->idlogement</p>
+<a href="">
+end;
         foreach ($this->objet[1] as $utilisateur) {
             $retour.=<<<end
-<p>logement associé $utilisateur->idlogement</p>
-<a href="">
-
+<p>$utilisateur->nom</p>
 end;
         }
         return $retour;
