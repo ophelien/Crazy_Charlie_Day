@@ -149,4 +149,12 @@ class ControleurGestion
             $app->redirect($app->urlFor("accueil"));
         }
     }
+
+    public function genererToken(){
+        $factory = new \RandomLib\Factory;
+        $generator = $factory->getGenerator(new \SecurityLib\Strength(\SecurityLib\Strength::MEDIUM));
+        $token = $generator->generateString(32, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+        return $token;
+    }
+
 }
