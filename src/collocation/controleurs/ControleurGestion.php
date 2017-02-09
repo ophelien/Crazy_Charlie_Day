@@ -15,7 +15,8 @@ class ControleurGestion
 
             }
         }else{ // utilisateur inconnu
-
+            $app = \Slim\Slim::getInstance();
+            $app->redirect("accueil");
         }
     }
 
