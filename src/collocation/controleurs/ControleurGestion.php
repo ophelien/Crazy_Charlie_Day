@@ -114,7 +114,7 @@ class ControleurGestion
                         $appartient->estOk = 0;
                         $appartient->urlGestion = null;
                         $appartient->save();
-                        $this->afficherGroupe(VueGestion::AFF_ERR_AJOUT);
+                        $this->afficherGroupe(VueGestion::AFF_AJOUT);
                     }
                 }
             }else{ // pas encore gerant
