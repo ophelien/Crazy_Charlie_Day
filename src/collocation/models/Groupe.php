@@ -6,4 +6,13 @@ class Groupe extends \Illuminate\Database\Eloquent\Model {
     protected $table = "groupe";
     protected $primaryKey = "idGroupe";
     public $timestamps = false;
+
+    public function users(){
+        $appartiens = Appartient::where("idGroupe","=",$this->idGroupe);
+        $tab = array();
+        foreach ($appartiens as $appartien){
+            array_push($tab, $appartien->utilisateur());
+        }
+        return $tab;
+    }
 }

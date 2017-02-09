@@ -28,6 +28,9 @@ class VueNavigation
             case VueNavigation::AFF_LISTE_UTILISATEUR :
                 $content = $this->listeUtilisateur();
                 break;
+            case VueNavigation::AFF_LISTE_LOGEMENT :
+                $content = $this->listeLogement();
+                break;
         }
         return VuePageHTML::getHeaders().$content.VuePageHTML::getFooter();
     }
@@ -40,7 +43,7 @@ class VueNavigation
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=$utilisateur->email.png>
+                <img src=img/user/$utilisateur->email.jpg>
             </div>
             <div class="card-content">
                 <p><b>$utilisateur->nom</b></p>
@@ -64,7 +67,7 @@ end;
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=$logement->idlogement.png>
+                <img src=img/apart/$logement->idlogement.jpg>
             </div>
             <div class="card-content">
                 <p><b>Nombre de places : $logement->places personnes</b></p>
@@ -79,6 +82,36 @@ end;
         }
         return $retour;
     }
+
+    private function detailUtilisateur(){
+            return <<<end
+<div class="detailU">
+<div class="row">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img src=img/user/$this->objet->email.jpg>
+            </div>
+            <div class="card-content">
+                <p><b>$this->objet->nom</b></p>
+            </div>
+            <div class="card-action">
+                <a href="#">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="waves-effect waves-light btn-large">Ajouter à ma coloc'</a>
+</div>
+end;
+    }
+
+
+
+
+
+
+
 
     private function index(){
         return <<<end

@@ -40,7 +40,7 @@ $app->get('/utilisateur/:email', function($email) {
 });
 
 $app->get('/logement/', function() {
-    (new collocation\controleurs\ControleurNavigation())->afficherListeUtilisateurs();
+    (new collocation\controleurs\ControleurNavigation())->afficherListeLogement();
 });
 
 $app->get('/logement/:id', function($id) {
