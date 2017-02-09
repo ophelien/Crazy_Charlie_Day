@@ -44,7 +44,7 @@ end;
         $retour = "";
         foreach($this->objet as $logement){
             $retour.=<<<end
-<img src=$logement->idLogement.png>
+<img src="$logement->idLogement">
 <p>Nombre de place(s): $logement->places</p>
 end;
 
