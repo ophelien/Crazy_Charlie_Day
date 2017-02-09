@@ -2,9 +2,11 @@
 
 namespace collocation\vues;
 
+use \collocation\vues\VuePageHTML;
+
 class VueNavigation
 {
-    const AFF_FORMULAIRE_LOGIN = 1;
+    const AFF_INDEX = 1;
     const AFF_LISTE_UTILISATEUR = 2;
     const AFF_LISTE_LOGEMENT = 3;
 
@@ -18,14 +20,14 @@ class VueNavigation
     public function render($selecteur)
     {
         switch ($selecteur) {
-            case VueNavigation::AFF_FORMULAIRE_LOGIN :
-                $content = $this->formulaire();
+            case VueNavigation::AFF_INDEX :
+                $content = $this->index();
                 break;
             case VueNavigation::AFF_LISTE_UTILISATEUR :
                 $content = $this->listeUtilisateur();
                 break;
         }
-        return $content;
+        return VuePageHTML::getHeaders().$content.VuePageHTML::getFooter();
     }
 
 
@@ -65,18 +67,48 @@ end;
         return $retour;
     }
 
-    private function formulaire(){
-        $app = \Slim\Slim::getInstance();
-        $c_form = $app->urlFor("connexion");
-        return <<<END
-<form method="post" action="$c_form">
-<fieldset>
-    <legend>Saisir vos identifiants</legend>
-    <input name="nom" type="text" required placeholder="<Nom>"/>
-    <input name="mdp" type="password" required placeholder="<Mot de passe>"/>
-</fieldset>
-<input type="submit" value="Connexion"/>
-</form>
-END;
+    private function index(){
+        return <<<end
+<a class="waves-effect waves-light btn grey" href=""><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
+<div class="test">
+<img class ="img" src="img/logo.png " height ="40%" width = "40%">
+<div class="row">
+    <form class="for">
+        <div class="row">
+            <div class="input-field">
+                <input placeholder="ex : Dupont"  type="text">
+                <label class="black-text">Nom d'utilisateur</label>
+            </div>
+            <div class="input-field">
+                <input placeholder="ex : Dupont@gmail.com" type="text">
+                <label class="black-text">Adresse mail</label>
+            </div>
+            <div class="input-field">
+                <input placeholder="*********"  type="password">
+                <label class="black-text">Mot de passe</label>
+            </div>
+            <div class="input-field">
+                <input placeholder="*********"  type="password">
+                <label class="black-text">Confirmation du mot de passe</label>
+            </div>
+        </div>
+        <a class="waves-effect waves-light btn green" href="">S'inscrire gratuitement</a>
+    </form>
+    <form class="for">
+        <div class="row">
+            <div class="input-field">
+                <input placeholder="ex : Dupont@gmail.com" type="text">
+                <label class="black-text">Adresse mail</label>
+            </div>
+            <div class="input-field">
+                <input placeholder="*********"  type="password">
+                <label class="black-text">Mot de passe</label>
+            </div>
+        </div>
+        <a class="waves-effect waves-light btn green" href="">Se connecter</a>
+    </form>
+</div>
+</div>
+end;
     }
 }

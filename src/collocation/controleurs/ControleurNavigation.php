@@ -8,9 +8,9 @@ use \collocation\models\User;
 class ControleurNavigation
 {
 
-    public function saisirLogin(){
+    public function index(){
         $vue = new VueNavigation();
-        print $vue->render(VueNavigation::AFF_FORMULAIRE_LOGIN);
+        print $vue->render(VueNavigation::AFF_INDEX);
     }
 
     public function connexion(){

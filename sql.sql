@@ -1,6 +1,12 @@
 
 /*!40101 SET NAMES utf8 */;
 
+CREATE TABLE IF NOT EXISTS `admin` (
+  `admin` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`admin`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS `logement` (
   `idLogement` int(11) NOT NULL AUTO_INCREMENT,
   `places` int(11) NOT NULL,
@@ -16,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 CREATE TABLE IF NOT EXISTS `groupe` (
   `idGroupe` int(11) NOT NULL AUTO_INCREMENT,
-  `estValidee` int(1) NOT NULL DEFAULT 0,
+  `status` int(1) NOT NULL DEFAULT 0,
   `idLogement` int(11),
   CONSTRAINT FK_groupe_logement FOREIGN KEY (idLogement) REFERENCES `logement`(idLogement),
   PRIMARY KEY (`idGroupe`)
@@ -25,8 +31,8 @@ CREATE TABLE IF NOT EXISTS `groupe` (
 CREATE TABLE IF NOT EXISTS `appartient` (
   `email` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `idGroupe` int(11) NOT NULL,
-  `urlGestion` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `urlInvitation` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `urlGestion` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `estOk` int(1) NOT NULL DEFAULT 0,
   CONSTRAINT FK_appartient_groupe FOREIGN KEY (idGroupe) REFERENCES `groupe`(idGroupe),
   CONSTRAINT FK_appartient_user FOREIGN KEY (email) REFERENCES `user`(email),
