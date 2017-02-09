@@ -147,7 +147,7 @@ end;
 <div class="test">
 <img class ="img" src="/img/logo.png " height ="40%" width = "40%">
 <div class="row">
-    <form class="for" method="POST" action="$r_inscription">
+    <form id="formulaire_inscription" class="for" method="POST" action="$r_inscription">
         <div class="row">
             <div class="input-field">
                 <input placeholder="ex : Dupont"  type="text" name="nom" required>
@@ -166,10 +166,9 @@ end;
                 <label class="black-text">Confirmation du mot de passe</label>
             </div>
         </div>
-        <button type="submit">Je m'inscris</button>
-        <a class="waves-effect waves-light btn green" href="">S'inscrire gratuitement</a>
+        <a id="boutton_inscription" class="waves-effect waves-light btn green">S'inscrire gratuitement</a>
     </form>
-    <form class="for" metho="POST" action="$r_connexion">
+    <form id="formulaire_connexion" class="for" metho="POST" action="$r_connexion">
         <div class="row">
             <div class="input-field">
                 <input placeholder="ex : Dupont@gmail.com" type="text">
@@ -180,10 +179,18 @@ end;
                 <label class="black-text">Mot de passe</label>
             </div>
         </div>
-        <a class="waves-effect waves-light btn green" href="">Se connecter</a>
+        <a id="boutton_connexion" class="waves-effect waves-light btn green">Se connecter</a>
     </form>
 </div>
 </div>
+<script>
+    document.getElementById("boutton_inscription").onclick = function() {
+        document.getElementById("formulaire_inscription").submit();
+    }
+    document.getElementById("boutton_connexion").onclick = function() {
+        document.getElementById("formulaire_connexion").submit();
+    }
+</script>
 end;
     }
 }
