@@ -73,6 +73,7 @@ class VueGestion
             if($this->objet[2] != null) {
                 $value1 = $this->objet[2]->idLogement;
                 $value2 = $this->objet[2]->places;
+                $r_supprimerBien = $app->urlFor("supprimerLogementColloc");
                 $retour .= <<<end
                 <h4><b>Appartement ciblé :</b></h4>
 <div class="detailU">
@@ -86,7 +87,7 @@ class VueGestion
                 <p><b>Nombre de places : $value2 personnes</b></p>
             </div>
             <div class="card-action">
-                <a href="#">Supprimer ce bien</a>
+                <a href="$r_supprimerBien">Supprimer ce bien</a>
             </div>
         </div>
     </div>
@@ -95,6 +96,7 @@ class VueGestion
 end;
             }
             foreach($this->objet[1] as $utilisateur){
+                $r_supprimer = $app->urlFor("supprimerUserColloc",array("email" => $utilisateur->email));
                 $r_details = $app->urlFor("membre",array("email" => $utilisateur->email));
                 if($this->objet[0]->status > 0) {
                     $ok = Appartient::where("email", "=", $utilisateur->email)->where("idGroupe", "=", $_SESSION['idGroupe'])->first();
@@ -126,7 +128,7 @@ end;
                 <a href="$r_details">Details</a>
             </div>
             <div class="card-action">
-                <a href="">Enlever de la coloc</a>
+                <a href="$r_supprimer">Enlever de la coloc</a>
             </div>
             
         </div>

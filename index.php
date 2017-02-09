@@ -71,4 +71,12 @@ $app->get('/validerGroupe/', function() {
     (new collocation\controleurs\ControleurGestion())->validerGroupe();
 })->name("validerGroupe");
 
+$app->get('/supprimerLogementColloc/', function() {
+    (new collocation\controleurs\ControleurGestion())->validerGroupe();
+})->name("supprimerLogementColloc");
+
+$app->get('/supprimerUserColloc/:email', function($email) {
+    (new collocation\controleurs\ControleurGestion())->validerGroupe();
+})->name("supprimerUserColloc");
+
 $app->run();
