@@ -88,7 +88,15 @@ $app->get('/utilisateur/', function() {
 });
 
 $app->get('/utilisateur/:email', function($email) {
-    (new collocation\controleurs\ControleurNavigation())->saisirLogin();
+    (new collocation\controleurs\ControleurNavigation())->afficherUtilisateur($email);
+});
+
+$app->get('/logement/', function() {
+    (new collocation\controleurs\ControleurNavigation())->afficherListeUtilisateurs();
+});
+
+$app->get('/logement/:id', function($id) {
+    (new collocation\controleurs\ControleurNavigation())->afficherLogement($id);
 });
 
 $app->run();
