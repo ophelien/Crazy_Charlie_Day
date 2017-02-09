@@ -16,6 +16,7 @@ class VuePageHTML
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
