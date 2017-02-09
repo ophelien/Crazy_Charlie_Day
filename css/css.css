@@ -13,8 +13,12 @@ body{
 }
 
 div.row{
+	width : 65%;
+}
+
+div.lis{
 	display : inline-block;
-	width : 33%;
+	width : 30%;
 }
 
 html{
