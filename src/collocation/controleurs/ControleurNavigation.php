@@ -150,6 +150,9 @@ class ControleurNavigation
                     if($appartient != null){
                         $_SESSION['idGroupe'] = $appartient->idGroupe;
                     }
+                    if($user->admin == 1){
+                        $_SESSION['admin'] = 1;
+                    }
                 }else{
                     array_push($error, "Mot de passe incorrect");
                 }
