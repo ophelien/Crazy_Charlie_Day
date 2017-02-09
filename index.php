@@ -75,9 +75,9 @@ END;
 echo $html;
 })->name("accueil");
 
-$app->get('/accueil/', function() {
+$app->get('/identification/', function() {
     (new collocation\controleurs\ControleurNavigation())->saisirLogin();
-});
+})->name("identification");
 
 $app->post('/', function() {
     (new \collocation\controleurs\ControleurNavigation())->connexion();
