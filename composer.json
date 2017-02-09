@@ -1,0 +1,17 @@
+{
+  "name": "UnToitPourTous",
+  "type" : "project",
+  "require": {
+    "illuminate/database": "5.0.*",
+    "php": ">=5.4.0",
+    "slim/slim": "~2.0",
+    "ircmaxell/password-compat": "^1.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "collocation": "src",
+      "conf" : "src"
+    }
+  }
+
+}
