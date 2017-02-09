@@ -60,7 +60,7 @@ $app->get('/ajouterUser/:email', function($email) {
 })->name("ajouterUser");
 
 $app->get('/ajouterLogement/:id', function($id) {
-    (new collocation\controleurs\ControleurNavigation())->ajouterLogement($id);
+    (new collocation\controleurs\ControleurGestion())->ajouterLogement($id);
 })->name("ajouterLogement");
 
 $app->get('/creerCollocation/', function() {
