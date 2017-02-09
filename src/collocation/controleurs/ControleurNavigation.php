@@ -134,5 +134,9 @@ class ControleurNavigation
         }
     }
 
+    public function saisirLogin(){
+        
+    }
+
 
 }

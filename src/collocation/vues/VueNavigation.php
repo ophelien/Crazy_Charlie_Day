@@ -184,14 +184,14 @@ end;
         </div>
         <a id="boutton_inscription" class="waves-effect waves-light btn green">S'inscrire gratuitement</a>
     </form>
-    <form id="formulaire_connexion" class="for" metho="POST" action="$r_connexion">
+    <form id="formulaire_connexion" class="for" method="POST" action="$r_connexion">
         <div class="row">
             <div class="input-field">
-                <input placeholder="ex : Dupont@gmail.com" type="text">
+                <input placeholder="ex : Dupont@gmail.com" type="text" name="mailCon" required>
                 <label class="black-text">Adresse mail</label>
             </div>
             <div class="input-field">
-                <input placeholder="*********"  type="password">
+                <input placeholder="*********"  type="password" name="mdpCon" required>
                 <label class="black-text">Mot de passe</label>
             </div>
         </div>
