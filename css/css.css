@@ -1,0 +1,15 @@
+footer{
+background:#ccc;
+position:absolute;
+bottom:0;
+width:100%;
+padding-top:50px;
+
+}
+
+header{
+	text-align :  center;
+	background : grey;
+	padding : 5%;
+
+}
