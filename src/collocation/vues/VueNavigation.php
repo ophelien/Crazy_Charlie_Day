@@ -94,6 +94,33 @@ end;
         return $retour;
     }
 
+    private function listeLogementCompatible(){
+        $app = \Slim\Slim::getInstance();
+        $retour = "";
+        foreach($this->objet as $logement){
+            $r_details = $app->urlFor("logement",array("id" => $logement->idLogement));
+            $retour.=<<<end
+<div class="lis">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img src=/img/apart/$logement->idLogement.jpg>
+            </div>
+            <div class="card-content">
+                <p><b>Nombre de places : $logement->places personnes</b></p>
+            </div>
+            <div class="card-action">
+                <a href="$r_details">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+end;
+        }
+        return $retour;
+    }
+
+
     private function detailUtilisateur(){
         $app = \Slim\Slim::getInstance();
         $r_ajouter = $app->urlFor("ajouterUser", array("email" => $this->objet->email));
