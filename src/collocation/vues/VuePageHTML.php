@@ -16,7 +16,7 @@ class VuePageHTML
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
         <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -60,7 +60,7 @@ end;
 
         return <<<end
 <div class="menu">
-    <div><img src="/img/logo.png" height="20%" width="20%"></div>
+    <div class="imgmenu"><img src="/img/logo.png" height="20%" width="20%"></div>
     <a class="waves-effect waves-light btn-large" href="$r_logements">Nos logements</a>
     <a class="waves-effect waves-light btn-large" href="$r_membre">Nos membres</a>
     $groupe
