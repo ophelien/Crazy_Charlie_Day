@@ -143,7 +143,7 @@ class ControleurNavigation
         if($user != null){
             if($_POST['mdpCon'] == filter_var($_POST['mdpCon'], FILTER_SANITIZE_STRING)){
                 if(password_verify($_POST['mdpCon'], $user->mdp)){
-                    $_SESSION['emai'] = $user->email;
+                    $_SESSION['email'] = $user->email;
                 }else{
                     array_push($error, "Mot de passe incorrect");
                 }
