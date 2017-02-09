@@ -155,8 +155,7 @@ class ControleurNavigation
         }
 
         if(sizeof ($error) == 0){
-            $vue = new VueNavigation();
-            print $vue->render(VueNavigation::AFF_LISTE_LOGEMENT);
+            $this->afficherListeLogement();
         }else{
             $vue = new VueNavigation($error);
             print $vue->render(VueNavigation::AFF_INDEX);
