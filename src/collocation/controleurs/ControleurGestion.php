@@ -126,7 +126,7 @@ class ControleurGestion
                 $logement = Logement::where('idLogement','=',$groupe->idLogement);
                 if($groupe->idLogement != null){ //si le logement est bien affecté
                     if($groupe->nbMembre()=== $logement->places){ // et si le logement a la taille exacte du groupe
-                       $groupe->status=1;
+                       $groupe->status=2;
                        $groupe->save();
                     }
                 }
