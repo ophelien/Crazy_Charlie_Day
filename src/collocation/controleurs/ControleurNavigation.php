@@ -138,6 +138,29 @@ class ControleurNavigation
     }
 
     public function saisirLogin(){
+        $error = [];
+        $user = User::where("email","=",$_POST['mailCon'])->first();
+        if($user != null){
+            if($_POST['mdpCon'] == filter_var($_POST['mdpCon'], FILTER_SANITIZE_STRING)){
+                if(password_verify($_POST['mdpCon'], $user->mdp)){
+                    $_SESSION['emai'] = $user->email;
+                }else{
+                    array_push($error, "Mot de passe incorrect");
+                }
+            }else{
+                array_push($error, "Mot de passe invalide");
+            }
+        }else{
+            array_push($error, "Mail invalide.");
+        }
+
+        if(sizeof ($error) == 0){
+            $vue = new VueNavigation();
+            print $vue->render(VueNavigation::AFF_LISTE_LOGEMENT);
+        }else{
+            $vue = new VueNavigation($error);
+            print $vue->render(VueNavigation::AFF_INDEX);
+        }
         
     }
 
