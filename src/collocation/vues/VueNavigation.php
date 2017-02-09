@@ -9,6 +9,8 @@ class VueNavigation
     const AFF_INDEX = 1;
     const AFF_LISTE_UTILISATEUR = 2;
     const AFF_LISTE_LOGEMENT = 3;
+    const AFF_UTILISATEUR = 4;
+    const AFF_LOGEMENT = 5;
 
     private $objet;
     public $URI;
@@ -32,13 +34,21 @@ class VueNavigation
             case VueNavigation::AFF_LISTE_LOGEMENT :
                 $content = $this->listeLogement();
                 break;
+            case VueNavigation::AFF_UTILISATEUR :
+                $content = $this->detailUtilisateur();
+                break;
+            case VueNavigation::AFF_LOGEMENT :
+                $content = $this->detailLogement();
+                break;
         }
         return VuePageHTML::getHeaders().VuePageHTML::getMenu().$content.VuePageHTML::getFooter();
     }
 
     private function listeUtilisateur(){
+        $app = \Slim\Slim::getInstance();
         $retour = "";
         foreach($this->objet as $utilisateur){
+            $r_details = $app->urlFor("membre",array("email" => $utilisateur->email));
             $retour .= <<<end
 <div class="row">
     <div class="col s12 m7">
@@ -50,7 +60,7 @@ class VueNavigation
                 <p><b>$utilisateur->nom</b></p>
             </div>
             <div class="card-action">
-                <a href="#">Details</a>
+                <a href="$r_details">Details</a>
             </div>
         </div>
     </div>
@@ -61,8 +71,10 @@ end;
     }
 
     private function listeLogement(){
+        $app = \Slim\Slim::getInstance();
         $retour = "";
         foreach($this->objet as $logement){
+            $r_details = $app->urlFor("logement",array("id" => $logement->idLogement));
             $retour.=<<<end
 <div class="row">
     <div class="col s12 m7">
@@ -74,7 +86,7 @@ end;
                 <p><b>Nombre de places : $logement->places personnes</b></p>
             </div>
             <div class="card-action">
-                <a href="#">Details</a>
+                <a href="$r_details">Details</a>
             </div>
         </div>
     </div>
@@ -96,10 +108,7 @@ end;
                 <img src=/img/user/$value1.jpg>
             </div>
             <div class="card-content">
-                <p><b>$value2/b></p>
-            </div>
-            <div class="card-action">
-                <a href="#">Details</a>
+                <p><b>$value2</b></p>
             </div>
         </div>
     </div>
@@ -119,7 +128,7 @@ end;
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=/img/user/$value1.jpg>
+                <img src=/img/apart/$value1.jpg>
             </div>
             <div class="card-content">
                 <p><b>Nombre de places : $value2 personnes</b></p>
