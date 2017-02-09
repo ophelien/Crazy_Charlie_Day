@@ -67,4 +67,8 @@ $app->get('/creerCollocation/', function() {
     (new collocation\controleurs\ControleurGestion())->creerGroupe();
 })->name("creerCollocation");
 
+$app->get('/validerGroupe/', function() {
+    (new collocation\controleurs\ControleurGestion())->validerGroupe();
+})->name("validerGroupe");
+
 $app->run();
