@@ -191,6 +191,8 @@ class ControleurNavigation
                 $app=Appartient::where('email','=',$user->email)->first();
                 $groupe=Groupe::where('idGroupe','=',$app->idgroupe())->first();
                 $log=Logement::where('places','=',$groupe->nbMembre())->get();
+                $vue = new VueNavigation($log);
+                print $vue-> render(VueNavigation::AFF_LOGEMENT); 
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
                 $app->redirect($app->urlFor("accueil"));
