@@ -40,9 +40,14 @@ class ControleurNavigation
         print $vue-> render(VueNavigation::AFF_LISTE_UTILISATEUR);
     }
 
+    public function afficherUtilisateur($email){
+        $valeur = User::where("email","=",$email)->first();
+        $vue = new VueNavigation($valeur);
+        //print $vue-> render(VueNavigation::AFF_UTILISATEUR);  // NOT YET IMPLEMENTED
+    }
+
     public function afficherListeLogement(){
-        $valeur = Logement::all();
-        $valeur = $valeur->where("places",">",0)->get();
+        $valeur = Logement::where("places",">",0)->get();
         $vue = new VueNavigation($valeur);
         print $vue -> render(VueNavigation::AFF_LISTE_LOGEMENT);
     }
