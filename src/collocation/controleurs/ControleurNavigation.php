@@ -105,7 +105,16 @@ class ControleurNavigation
         }
 
         if (sizeof ( $error ) == 0){
-            ajouterUtilisateurBDD($nom, $mail, $mdp, $message);
+            $mdp = password_hash($mdp, PASSWORD_DEFAULT, Array('cost' => 12));
+            $u = new User();
+            $u->email = $mail;
+            $u->mdp = $mdp;
+            $u->nom = $nom;
+            $u->message = $message;
+            $u->save();
+
+            $_SESSION['email'] = $u->email;
+
             $vue = new VueNavigation($error);
             print $vue->render(VueNavigation::AFF_LISTE_LOGEMENT);
         }else{
@@ -114,16 +123,5 @@ class ControleurNavigation
         }
     }
 
-    public function ajouterUtilisateurBDD($nom, $mail, $mdp, $mess){
-        $mdp = password_hash($mdp, PASSWORD_DEFAULT, Array('cost' => 12));
-        
-        $u = new User();
-        $u->email = $mail;
-        $u->mdp = $mdp;
-        $u->nom = $nom;
-        $u->message = $mess;
-
-        $u->save();
-    }
 
 }

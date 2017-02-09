@@ -46,16 +46,16 @@ end;
         $r_accueil = $app->urlFor("accueil");
 
         if(isset($_SESSION['email'])){
-            $connexion = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_deconnexion\">Se connecter</a>";
+            $connexion = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_deconnexion\">Deconnexion</a>";
         }else{
-            $connexion = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_accueil\">Se connecter</a>
-    <a class=\"waves-effect waves-light btn-large\" href=\"$r_accueil\">S'inscrire</a>";
+            $connexion = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_accueil\">Connexion</a>
+    <a class=\"waves-effect waves-light btn-large\" href=\"$r_accueil\">Inscription</a>";
         }
 
         if(isset($_SESSION['idGroupe'])){
             $groupe = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_aff_coloc\">Ma coloc'</a>";
         }else{
-            $groupe = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_creer_coloc\">Créer une collocation</a>";
+            $groupe = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_creer_coloc\">Créer colloc'</a>";
         }
 
         return <<<end
