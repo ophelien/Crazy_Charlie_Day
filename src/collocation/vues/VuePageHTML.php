@@ -48,8 +48,7 @@ end;
         if(isset($_SESSION['email'])){
             $connexion = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_deconnexion\">Deconnexion</a>";
         }else{
-            $connexion = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_accueil\">Connexion</a>
-    <a class=\"waves-effect waves-light btn-large\" href=\"$r_accueil\">Inscription</a>";
+            $connexion = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_accueil\">Connexion</a>";
         }
 
         if(isset($_SESSION['idGroupe'])){
