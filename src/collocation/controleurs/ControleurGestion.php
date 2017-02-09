@@ -98,15 +98,16 @@ class ControleurGestion
         if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
             $user = User::where("email","=",$_SESSION['email'])->first();
             if($user->estGestionnaire()){ // deja gerant
-                $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe']);
+                $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe'])->first();
                 if($groupe->status==0){
-                    $place = Logement::select('places')->where('idLogement','=',$idlogem);
-                    $grp = Groupe::where('idLogement','=',$idlogem);
-                    if($grp == null&&($place===$groupe->nbMembre())){ // si le logement n'est pas déjà attribué et s'il y a assez de places
+                    $place = Logement::where('idLogement','=',$idlogem)->first();
+                    $grp = Groupe::where('idLogement','=',$idlogem)->first();
+                    if($grp == null && $place->places == $groupe->nbMembre()){ // si le logement n'est pas déjà attribué et s'il y a assez de places
                         $groupe->idLogement = $idlogem;
                         $groupe->save();
                     }
                 }
+                $this->afficherGroupe();
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
                 $app->redirect("accueil");

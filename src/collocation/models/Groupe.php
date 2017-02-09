@@ -17,7 +17,7 @@ class Groupe extends \Illuminate\Database\Eloquent\Model {
     }
 
     public function nbMembre(){
-        $appartiens = Appartient::all();
+        $appartiens = Appartient::where("idGroupe","=",$this->idGroupe)->get();
         return sizeof($appartiens);
     }
 }
