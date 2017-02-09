@@ -3,7 +3,7 @@
 
 CREATE TABLE IF NOT EXISTS `admin` (
   `admin` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `password` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   PRIMARY KEY (`admin`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
@@ -15,8 +15,9 @@ CREATE TABLE IF NOT EXISTS `logement` (
 
 CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `nom` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `message` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `mdp` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `nom` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `message` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
@@ -29,10 +30,10 @@ CREATE TABLE IF NOT EXISTS `groupe` (
 );
 
 CREATE TABLE IF NOT EXISTS `appartient` (
-  `email` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `idGroupe` int(11) NOT NULL,
-  `urlInvitation` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `urlGestion` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `urlInvitation` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `urlGestion` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `estOk` int(1) NOT NULL DEFAULT 0,
   CONSTRAINT FK_appartient_groupe FOREIGN KEY (idGroupe) REFERENCES `groupe`(idGroupe),
   CONSTRAINT FK_appartient_user FOREIGN KEY (email) REFERENCES `user`(email),
