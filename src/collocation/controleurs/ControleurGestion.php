@@ -157,4 +157,14 @@ class ControleurGestion
         return $token;
     }
 
+    public function supprimerBien(){
+        $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe'])->first();
+        $groupe->idLogement = null;
+        $groupe->save();
+    }
+
+    public function supprimerUser($emailUser){
+        $appart = Appartient::where('email', '=', $emailUser)->where('idGroupe','=',$_SESSION['idGroupe'])->first();
+        $appart->delete();
+    }
 }

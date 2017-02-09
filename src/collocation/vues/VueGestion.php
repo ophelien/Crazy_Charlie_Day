@@ -79,7 +79,7 @@ end;
                 <a href="$r_details">Details</a>
             </div>
             <div class="card-action">
-                <a href="">Enlever de la coloc</a>
+                <a href="#">Enlever de la coloc</a>
             </div>
             
         </div>
