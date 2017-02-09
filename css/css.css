@@ -18,7 +18,9 @@ div.row{
 
 div.lis{
 	display : inline-block;
-	width : 30%;
+	width : 25%;
+	padding-left : 4%;
+	padding-right : 4%
 }
 
 html{
