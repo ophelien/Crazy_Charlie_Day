@@ -37,6 +37,16 @@ end;
     }
 
     public static function getMenu(){
+        return <<<end
+<div class="menu">
+    <img src="logo.png" height="20%" width="20%">
+    <a class="waves-effect waves-light btn-large">Nos logements</a>
+    <a class="waves-effect waves-light btn-large">Nos membres</a>
+    <a class="waves-effect waves-light btn-large">Ma coloc'</a>
+    <a class="waves-effect waves-light btn-large">Se connecter</a>
+    <a class="waves-effect waves-light btn-large">S'inscrire</a>
+</div>
+end;
 
     }
 }
