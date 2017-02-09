@@ -42,7 +42,7 @@ class ControleurNavigation
 
     public function afficherListeLogement(){
         $valeur = Logement::all();
-        $valeur = $valeur->where(places>1);
+        $valeur = $valeur->where("places",">",0)->get();
         $vue = new VueNavigation($valeur);
         print $vue -> render(VueNavigation::AFF_LISTE_LOGEMENT);
     }
