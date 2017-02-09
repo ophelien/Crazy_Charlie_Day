@@ -49,4 +49,8 @@ class ControleurGestion
         }
     }
 
+    public function appartientGroupe($idGroupe){
+
+    }
+
 }
