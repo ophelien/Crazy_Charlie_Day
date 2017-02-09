@@ -49,7 +49,6 @@ class VueNavigation
         </div>
     </div>
 </div>
-<img >
 end;
         }
         return $retour;
