@@ -75,6 +75,10 @@ $app->get('/supprimerLogementColloc/', function() {
     (new collocation\controleurs\ControleurGestion())->supprimerBien();
 })->name("supprimerLogementColloc");
 
+$app->get('/invitation/:invitation', function() {
+    (new collocation\controleurs\ControleurGestion())->supprimerBien();
+})->name("invitation");
+
 $app->get('/supprimerUserColloc/:email', function($email) {
     (new collocation\controleurs\ControleurGestion())->supprimerUser($email);
 })->name("supprimerUserColloc");

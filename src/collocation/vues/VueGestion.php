@@ -106,12 +106,13 @@ end;
             foreach($this->objet[1] as $utilisateur){
                 $r_supprimer = $app->urlFor("supprimerUserColloc",array("email" => $utilisateur->email));
                 $r_details = $app->urlFor("membre",array("email" => $utilisateur->email));
+                $lien = "";
                 if($this->objet[0]->status > 0) {
-                    $ok = Appartient::where("email", "=", $utilisateur->email)->where("idGroupe", "=", $_SESSION['idGroupe'])->first();
-                    if($ok->estOk){
+                    $appartient = Appartient::where("email", "=", $utilisateur->email)->where("idGroupe", "=", $_SESSION['idGroupe'])->first();
+                    if($appartient->estOk){
                         $estOk = "<div class=\"card-content\"><p>Est d'accord</p></div>";
                     }else{
-                        if($ok->estOk == null){
+                        if($appartient->estOk == null){
                             $estOk = "<div class=\"card-content\"><p>Non renseigné</p></div>";
                         }else {
                             $estOk = "<div class=\"card-content\"><p>N'est pas d'accord</p></div>";
@@ -138,11 +139,22 @@ end;
             <div class="card-action">
                 <a href="$r_supprimer">Enlever de la coloc</a>
             </div>
-            
+            $lien
         </div>
     </div>
 </div>
 end;
+            }
+
+            if($this->objet[0]->status == 1){ // pas encore validée admin
+                $retour .= "<h4><b>Url à envoyer :</b></h4>";
+                $appartients = Appartient::where("idGroupe", "=", $_SESSION['idGroupe'])->get();
+                foreach ($appartients as $appartient){
+                    $user = $appartient->user();
+                    if($user->email != $_SESSION['email']) {
+                        $retour .= "<div>$user->email : " . $_SERVER['HTTP_HOST'] . $app->urlFor("invitation", array("invitation" => $appartient->urlInvitation)) . "</div>";
+                    }
+                }
             }
             if($this->objet[3] && $this->objet[0]->status == 0){ // pas encore validée
                 $retour .= "<a href='$r_valider' id=\"boutton_connexion\" class=\"waves-effect waves-light btn green\">Valider</a>";
