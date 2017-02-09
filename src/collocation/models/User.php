@@ -9,14 +9,14 @@ class User extends \Illuminate\Database\Eloquent\Model {
     protected $primaryKey = "email";
     public $timestamps = false;
 
-    public function estGerant(){
+    public function estGestionnaire(){
         $appartients = Appartient::where("email","=",$this->email)->get();
         foreach ($appartients as $appartient){
             if($appartient->urlGestion != null){
-                return true;
+                return 1;
             }
         }
-        return false;
+        return 0;
     }
 }
 

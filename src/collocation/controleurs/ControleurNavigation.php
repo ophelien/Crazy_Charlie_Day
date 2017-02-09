@@ -14,6 +14,17 @@ class ControleurNavigation
         print $vue->render(VueNavigation::AFF_INDEX);
     }
 
+    public function deconnexion(){
+        if(isset($_SESSION['idGroupe'])){
+            unset($_SESSION['idGroupe']);
+        }
+        if(isset($_SESSION['email'])){
+            unset($_SESSION['email']);
+        }
+        $app =  \Slim\Slim::getInstance();
+        $app->redirect($app->urlFor("accueil"));
+    }
+
     public function connexion(){
         $app =  \Slim\Slim::getInstance();
         $requete = $app->request;
@@ -113,7 +124,7 @@ class ControleurNavigation
             $u->message = $message;
             $u->save();
 
-            $_SESSION['email'] = $u->email;
+            $_SESSION['email'] = $mail;
 
             $vue = new VueNavigation($error);
             print $vue->render(VueNavigation::AFF_LISTE_LOGEMENT);

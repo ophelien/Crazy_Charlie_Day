@@ -8,10 +8,10 @@ class Groupe extends \Illuminate\Database\Eloquent\Model {
     public $timestamps = false;
 
     public function users(){
-        $appartiens = Appartient::where("idGroupe","=",$this->idGroupe);
+        $appartiens = Appartient::where("idGroupe","=",$this->idGroupe)->get();
         $tab = array();
         foreach ($appartiens as $appartien){
-            array_push($tab, $appartien->utilisateur());
+            array_push($tab, $appartien->user());
         }
         return $tab;
     }

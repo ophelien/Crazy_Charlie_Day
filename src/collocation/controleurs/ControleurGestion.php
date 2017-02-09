@@ -2,9 +2,11 @@
 
 namespace collocation\controleurs;
 
-use collocation\models\Appartient;
-use collocation\models\Groupe;
+use \collocation\models\Appartient;
+use \collocation\models\Groupe;
+use collocation\models\Logement;
 use \collocation\models\User;
+use \collocation\vues\VueGestion;
 
 class ControleurGestion
 {
@@ -22,7 +24,8 @@ class ControleurGestion
                 $appartient->email = $_SESSION['email'];
                 $appartient->idGroupe = $groupe->idGroupe;
                 $appartient->estOk = 1;
-                $appartient->urlGestion = ""; // TODO
+                $gestion = preg_match("#.*^(?=.{8})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#", $_SESSION['email']);
+                $appartient->urlGestion = $gestion; // TODO
                 $appartient->save();
                 $_SESSION['idGroupe'] = $groupe->idGroupe;
                 $this->afficherGroupe();
@@ -38,12 +41,15 @@ class ControleurGestion
             $user = User::where("email","=",$_SESSION['email'])->first();
             if($user->estGestionnaire()){ // deja gerant
                 $groupe = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
+                if($groupe->idLogement != null){$lieu = Logement::where("idLogement","=",$groupe->idLogement)->first();}
+                else{$lieu = null;}
                 $users = $groupe->users();
-                $vue = new VueNavigation(array($groupe,$users));
+                $vue = new VueGestion(array($groupe,$users,$lieu));
                 print $vue-> render(VueGestion::AFF_GROUPE);  // NOT YET IMPLEMENTED
             }else{ // pas encore gerant
-                $app = \Slim\Slim::getInstance();
-                $app->redirect($app->urlFor("accueil"));
+               // $app = \Slim\Slim::getInstance();
+                //$app->redirect($app->urlFor("accueil"));
+                print $user->estGestionnaire()." -- ";
             }
         }else{ // utilisateur inconnu
             $app = \Slim\Slim::getInstance();

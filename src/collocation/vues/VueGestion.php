@@ -28,21 +28,50 @@ class VueGestion
                 $content = $this->afficherGroupe();
                 break;
         }
-        return VuePageHTML::getHeaders() . $content . VuePageHTML::getFooter();
+        return VuePageHTML::getHeaders().VuePageHTML::getMenu(). $content . VuePageHTML::getFooter();
     }
 
         private function afficherGroupe(){
-        $retour = "";
-        $log = $this->objet[0];
-            $retour.=<<<end
-<p>logement associé $log->idlogement</p>
-<a href="">
+            $retour= "";
+            $app = \Slim\Slim::getInstance();
+            if($this->objet[2] != null) {
+                $value1 = $this->objet[2]->idLogement;
+                $value2 = $this->objet[2]->places;
+                $retour .= <<<end
+<div class="detailU">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img src=/img/apart/$value1.jpg>
+            </div>
+            <div class="card-content">
+                <p><b>Nombre de places : $value2 personnes</b></p>
+            </div>
+        </div>
+    </div>
+</div>
 end;
-        foreach ($this->objet[1] as $utilisateur) {
-            $retour.=<<<end
-<p>$utilisateur->nom</p>
+            }
+            foreach($this->objet[1] as $utilisateur){
+                $r_details = $app->urlFor("membre",array("email" => $utilisateur->email));
+                $retour .= <<<end
+<div class="lis">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img src=/img/user/$utilisateur->email.jpg>
+            </div>
+            <div class="card-content">
+                <p><b>$utilisateur->nom</b></p>
+            </div>
+            <div class="card-action">
+                <a href="$r_details">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
 end;
-        }
+            }
         return $retour;
     }
 }
