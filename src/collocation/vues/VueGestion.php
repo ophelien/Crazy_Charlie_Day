@@ -123,7 +123,7 @@ end;
                     }
                 }else{
                     $estOk = "";
-                    if($utilisateur->email == $_SESSION['email']) {
+                    if($utilisateur->email != $_SESSION['email']) {
                         $suppressionTxt = "<div class=\"card-action\"><a href=\"$r_supprimer\">Enlever de la coloc</a></div>";
                     }
                 }
