@@ -119,6 +119,7 @@ class ControleurNavigation
         }
 
         if (sizeof ( $error ) == 0){
+            copy("./img/user/defaut.jpg","./img/user/$mail.jpg");
             $mdp = password_hash($mdp, PASSWORD_DEFAULT, Array('cost' => 12));
             $u = new User();
             $u->email = $mail;
@@ -129,8 +130,7 @@ class ControleurNavigation
 
             $_SESSION['email'] = $mail;
 
-            $vue = new VueNavigation();
-            print $vue->render(VueNavigation::AFF_LISTE_LOGEMENT);
+           $this->afficherListeLogement();
         }else{
             $vue = new VueNavigation($error);
             print $vue->render(VueNavigation::AFF_INDEX);

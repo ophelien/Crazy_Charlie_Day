@@ -38,23 +38,27 @@ class VueGestion
                 $value1 = $this->objet[2]->idLogement;
                 $value2 = $this->objet[2]->places;
                 $retour .= <<<end
+                <p><b>Appartement ciblé :</b></p>
 <div class="detailU">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
+            
                 <img src=/img/apart/$value1.jpg>
             </div>
             <div class="card-content">
-                <p><b>Nombre de places : $value2 personnes</b></p>
+                <h3><b>Nombre de places : $value2 personnes</b></h3>
             </div>
         </div>
     </div>
 </div>
+<h3><b>Personnes concernées : </b></h3>
 end;
             }
             foreach($this->objet[1] as $utilisateur){
                 $r_details = $app->urlFor("membre",array("email" => $utilisateur->email));
                 $retour .= <<<end
+                
 <div class="lis">
     <div class="col s12 m7">
         <div class="card">
