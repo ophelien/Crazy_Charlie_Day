@@ -27,6 +27,9 @@ class ControleurGestion
                 $_SESSION['idGroupe'] = $groupe->idGroupe;
                 $this->afficherGroupe();
             }
+        }else{
+            $app = \Slim\Slim::getInstance();
+            $app->redirect($app->urlFor("accueil"));
         }
     }
 
