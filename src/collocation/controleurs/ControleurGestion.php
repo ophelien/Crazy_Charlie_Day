@@ -14,13 +14,14 @@ class ControleurGestion
 {
     public function invitation($url){
         $appartient = Appartient::where("urlInvitation","=",$url);
-        if($appartient != null) {
+        if($appartient != null && !isset($_SESSION['email'])) {
             $user = User::where("email","=",$appartient->email);
             $_SESSION['invitation'] = $user->email;
             $_SESSION['invitationValide'] = $appartient->estOk;
             $this->afficherInvitation();
         }else {
-            print "aucun coffret";
+            $app = \Slim\Slim::getInstance();
+            $app->redirect($app->urlFor("accueil"));
         }
     }
 
