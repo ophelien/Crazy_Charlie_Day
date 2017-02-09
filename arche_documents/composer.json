@@ -1,0 +1,11 @@
+{
+
+    "require": {
+        "illuminate/database": "5.0.*",
+        "slim/slim": "2.*",
+        "ircmaxell/password-compat": "1.0.*",
+        "php": ">=5.4"
+
+    }
+
+}
