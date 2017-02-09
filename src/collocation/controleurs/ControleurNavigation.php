@@ -59,4 +59,11 @@ class ControleurNavigation
         //print $vue-> render(VueNavigation::AFF_LOGEMENT);  // NOT YET IMPLEMENTED
     }
 
+    public function inscription(){
+        echo $_POST['nom'];
+    }
+
+
+
+
 }

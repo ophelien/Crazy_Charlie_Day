@@ -11,10 +11,12 @@ class VueNavigation
     const AFF_LISTE_LOGEMENT = 3;
 
     private $objet;
+    public $URI;
 
     public function __construct($array = null)
     {
-        $this->objet =$array;
+        $this->objet = $array;
+        $this->URI = \Slim\Slim::getInstance()->request->getRootUri();
     }
 
     public function render($selecteur)
@@ -66,7 +68,7 @@ end;
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=$logement->idlogement.png>
+                <img src=img/apart/$logement->idlogement.jpg>
             </div>
             <div class="card-content">
                 <p><b>Nombre de places : $logement->places personnes</b></p>
@@ -82,31 +84,62 @@ end;
         return $retour;
     }
 
+    private function detailUtilisateur(){
+            return <<<end
+<div class="detailU">
+<div class="row">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img src=img/user/$this->objet->email.jpg>
+            </div>
+            <div class="card-content">
+                <p><b>$this->objet->nom</b></p>
+            </div>
+            <div class="card-action">
+                <a href="#">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="waves-effect waves-light btn-large">Ajouter à ma coloc'</a>
+</div>
+end;
+    }
+
+
+
+
+
+
+
+
     private function index(){
         return <<<end
 <a class="waves-effect waves-light btn grey" href=""><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
 <div class="test">
 <img class ="img" src="img/logo.png " height ="40%" width = "40%">
 <div class="row">
-    <form class="for">
+    <form class="for" method="POST" action="$this->URI/inscription">
         <div class="row">
             <div class="input-field">
-                <input placeholder="ex : Dupont"  type="text">
+                <input placeholder="ex : Dupont"  type="text" name="nom" required>
                 <label class="black-text">Nom d'utilisateur</label>
             </div>
             <div class="input-field">
-                <input placeholder="ex : Dupont@gmail.com" type="text">
+                <input placeholder="ex : Dupont@gmail.com" type="text" name="mail" required>
                 <label class="black-text">Adresse mail</label>
             </div>
             <div class="input-field">
-                <input placeholder="*********"  type="password">
+                <input placeholder="*********"  type="password" name="mdp1" required>
                 <label class="black-text">Mot de passe</label>
             </div>
             <div class="input-field">
-                <input placeholder="*********"  type="password">
+                <input placeholder="*********"  type="password" name="mdp2" required>
                 <label class="black-text">Confirmation du mot de passe</label>
             </div>
         </div>
+        <button type="submit">Je m'inscris</button>
         <a class="waves-effect waves-light btn green" href="">S'inscrire gratuitement</a>
     </form>
     <form class="for">
