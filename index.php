@@ -23,7 +23,7 @@ $app->post('/inscription/', function(){
     (new collocation\controleurs\ControleurNavigation())->inscription();
 })->name("inscription");
 
-$app->get('/identification/', function() {
+$app->post('/identification/', function() {
     (new collocation\controleurs\ControleurNavigation())->saisirLogin();
 })->name("identification");
 
