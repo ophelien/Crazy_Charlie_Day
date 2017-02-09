@@ -81,6 +81,33 @@ end;
         return $retour;
     }
 
+    private function detailUtilisateur(){
+        $retour = "";
+        foreach($this->objet as $utilisateur){
+            $retour .= <<<end
+<div class="detailU">
+<div class="row">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img src=img/user/$utilisateur->email.jpg>
+            </div>
+            <div class="card-content">
+                <p><b>$utilisateur->nom</b></p>
+            </div>
+            <div class="card-action">
+                <a href="#">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="waves-effect waves-light btn-large">Ajouter à ma coloc'</a>
+</div>
+end;
+        }
+        return $retour;
+    }
+
     private function index(){
         return <<<end
 <a class="waves-effect waves-light btn grey" href=""><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
