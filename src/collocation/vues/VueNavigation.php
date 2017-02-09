@@ -30,7 +30,6 @@ class VueNavigation
         return VuePageHTML::getHeaders().$content.VuePageHTML::getFooter();
     }
 
-
     private function listeUtilisateur(){
         $retour = "";
         foreach($this->objet as $utilisateur){
