@@ -60,10 +60,70 @@ class ControleurNavigation
     }
 
     public function inscription(){
-        echo $_POST['nom'];
+        $mdp = ""; $nom = ""; $mail = ""; $message =""; $error = [];
+
+        if (isset($_POST['mdp1']) && isset($_POST['mdp2'])){
+            if($_POST['mdp1'] === $_POST['mdp2']){
+                if($_POST['mdp1'] == filter_var($_POST['mdp1'], FILTER_SANITIZE_STRING)){
+                    $mdp = filter_var($_POST['mdp1'], FILTER_SANITIZE_STRING);
+                }else{
+                    array_push($error, "Le mot de passe indiqué est invalide, veuillez le changer.");
+                }
+            }else{
+                array_push($error, "Les mots de passe indiqués sont différents, veuillez les modifier.");
+            }
+        }else{
+            array_push($error, "Veuillez entrez un mot de passe.");
+        }
+
+        if (isset($_POST['nom'])){
+            if($_POST['nom'] == filter_var($_POST['nom'], FILTER_SANITIZE_STRING)){
+                $nom = filter_var($_POST['nom'], FILTER_SANITIZE_STRING);
+            }else{
+                array_push($error, "Le nom indiqué est invalide, veuillez le modifier.");
+            }
+        }else{
+            array_push($error, "Veuillez entrez un nom.");
+        }
+
+        if (isset($_POST['mail'])){
+            if(filter_var( $_POST['mail'], FILTER_VALIDATE_EMAIL)){
+                $mail = filter_var($_POST['mail'], FILTER_SANITIZE_EMAIL);
+            }else{
+                array_push($error, "Le mail indiqué est invalide, veuillez le changer.");
+            }
+        }else{
+            array_push($error, "Le mail indiqué est invalide, veuillez le changer.");
+        }
+
+        if(isset($_POST['message'])){
+            if($_POST['message'] == filter_var($_POST['message'], FILTER_SANITIZE_STRING)){
+                $message = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+            }else{
+                array_push($error, "Le message indiqué est invalide, veuillez le changer.");
+            }
+        }
+
+        if (sizeof ( $error ) == 0){
+            ajouterUtilisateurBDD($nom, $mail, $mdp, $message);
+            $vue = new VueNavigation($error);
+            print $vue->render(VueNavigation::AFF_LISTE_LOGEMENT);
+        }else{
+            $vue = new VueNavigation($error);
+            print $vue->render(VueNavigation::AFF_INDEX);
+        }
     }
 
+    public function ajouterUtilisateurBDD($nom, $mail, $mdp, $mess){
+        $mdp = password_hash($mdp, PASSWORD_DEFAULT, Array('cost' => 12));
+        
+        $u = new User();
+        $u->email = $mail;
+        $u->mdp = $mdp;
+        $u->nom = $nom;
+        $u->message = $mess;
 
-
+        $u->save();
+    }
 
 }

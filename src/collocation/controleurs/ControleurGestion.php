@@ -51,7 +51,7 @@ class ControleurGestion
         }
     }
 
-    public function ajouterDansLeGroupe($gens){
+    public function ajouterDansLeGroupe($idGens){
         if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
             $user = User::where("email","=",$_SESSION['email'])->first();
             if($user->estGestionnaire()){ // deja gerant
@@ -59,7 +59,7 @@ class ControleurGestion
                 $logement = Logement::select("places")->where('idlogement',"=","$groupe->idLogement")->get();
                 if($groupe->nbMembre() < $logement){//si y a de la place dans le logement
                     $appartient = new Appartient();
-                    $appartient->email = $gens;
+                    $appartient->email = $idGens;
                     $appartient ->idGroupe = $_SESSION['idGroupe'];
                     $appartient->estOk = 0;
                     $appartient->urlGestion = null;
@@ -75,13 +75,15 @@ class ControleurGestion
         }
     }
 
-    public function ajouterLogement($logement){
+    public function ajouterLogement($idlogem){
         if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
             $user = User::where("email","=",$_SESSION['email'])->first();
             if($user->estGestionnaire()){ // deja gerant
                 $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe']);
-                if($logement == null){
-                    $groupe->idLogement = $logement;
+                $place = Logement::select('places')->where('idLogement','=',$idlogem);
+                $grp = Groupe::where('idLogement','=',$idlogem);
+                if($grp == null&&($place===$groupe->nbMembre())){ // si le logement n'est pas déjà attribué et s'il y a assez de places
+                    $groupe->idLogement = $idlogem;
                     $groupe->save();
                 }
             }else{ // pas encore gerant
