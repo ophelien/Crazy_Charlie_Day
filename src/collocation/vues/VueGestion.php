@@ -47,12 +47,12 @@ class VueGestion
                 <img src=/img/apart/$value1.jpg>
             </div>
             <div class="card-content">
-                <p><b>Nombre de places : $value2 personnes</b></p>
+                <h3><b>Nombre de places : $value2 personnes</b></h3>
             </div>
         </div>
     </div>
 </div>
-<p><b>Personnes concernées : </b></p>
+<h3><b>Personnes concernées : </b></h3>
 end;
             }
             foreach($this->objet[1] as $utilisateur){
