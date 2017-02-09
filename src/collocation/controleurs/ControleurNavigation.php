@@ -44,7 +44,7 @@ class ControleurNavigation
     public function afficherUtilisateur($email){
         $valeur = User::where("email","=",$email)->first();
         $vue = new VueNavigation($valeur);
-        //print $vue-> render(VueNavigation::AFF_UTILISATEUR);  // NOT YET IMPLEMENTED
+        print $vue-> render(VueNavigation::AFF_UTILISATEUR);  // NOT YET IMPLEMENTED
     }
 
     public function afficherListeLogement(){
@@ -56,7 +56,7 @@ class ControleurNavigation
     public function afficherLogement($idlogement){
         $valeur = Logement::where("idLogement","=",$idlogement)->first();
         $vue = new VueNavigation($valeur);
-        //print $vue-> render(VueNavigation::AFF_LOGEMENT);  // NOT YET IMPLEMENTED
+        print $vue-> render(VueNavigation::AFF_LOGEMENT);  // NOT YET IMPLEMENTED
     }
 
     public function inscription(){

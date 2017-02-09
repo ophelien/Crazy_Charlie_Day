@@ -16,6 +16,13 @@ div.row{
 	width : 65%;
 }
 
+div.lis{
+	display : inline-block;
+	width : 25%;
+	padding-left : 4%;
+	padding-right : 4%
+}
+
 html{
 
 	background:url(/img/stan.jpg)no-repeat center center fixed;
@@ -38,5 +45,11 @@ a.btn-large{
 	background-color : white;
 	color : green;
 	width : 15%;
+}
+
+div.detailU{
+	width : 30%;
+	margin-left : 35%;
+	margin-right : 35%;
 }
 

@@ -9,14 +9,14 @@ class VueNavigation
     const AFF_INDEX = 1;
     const AFF_LISTE_UTILISATEUR = 2;
     const AFF_LISTE_LOGEMENT = 3;
+    const AFF_UTILISATEUR = 4;
+    const AFF_LOGEMENT = 5;
 
     private $objet;
-    public $URI;
 
     public function __construct($array = null)
     {
         $this->objet = $array;
-        $this->URI = \Slim\Slim::getInstance()->request->getRootUri();
     }
 
     public function render($selecteur)
@@ -24,6 +24,7 @@ class VueNavigation
         switch ($selecteur) {
             case VueNavigation::AFF_INDEX :
                 $content = $this->index();
+                return VuePageHTML::getHeaders().$content.VuePageHTML::getFooter();
                 break;
             case VueNavigation::AFF_LISTE_UTILISATEUR :
                 $content = $this->listeUtilisateur();
@@ -31,25 +32,33 @@ class VueNavigation
             case VueNavigation::AFF_LISTE_LOGEMENT :
                 $content = $this->listeLogement();
                 break;
+            case VueNavigation::AFF_UTILISATEUR :
+                $content = $this->detailUtilisateur();
+                break;
+            case VueNavigation::AFF_LOGEMENT :
+                $content = $this->detailLogement();
+                break;
         }
-        return VuePageHTML::getHeaders().$content.VuePageHTML::getFooter();
+        return VuePageHTML::getHeaders().VuePageHTML::getMenu().$content.VuePageHTML::getFooter();
     }
 
     private function listeUtilisateur(){
+        $app = \Slim\Slim::getInstance();
         $retour = "";
         foreach($this->objet as $utilisateur){
+            $r_details = $app->urlFor("membre",array("email" => $utilisateur->email));
             $retour .= <<<end
-<div class="row">
+<div class="lis">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/user/$utilisateur->email.jpg>
+                <img src=/img/user/$utilisateur->email.jpg>
             </div>
             <div class="card-content">
                 <p><b>$utilisateur->nom</b></p>
             </div>
             <div class="card-action">
-                <a href="#">Details</a>
+                <a href="$r_details">Details</a>
             </div>
         </div>
     </div>
@@ -60,20 +69,22 @@ end;
     }
 
     private function listeLogement(){
+        $app = \Slim\Slim::getInstance();
         $retour = "";
         foreach($this->objet as $logement){
+            $r_details = $app->urlFor("logement",array("id" => $logement->idLogement));
             $retour.=<<<end
-<div class="row">
+<div class="lis">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/apart/$logement->idlogement.jpg>
+                <img src=/img/apart/$logement->idLogement.jpg>
             </div>
             <div class="card-content">
                 <p><b>Nombre de places : $logement->places personnes</b></p>
             </div>
             <div class="card-action">
-                <a href="#">Details</a>
+                <a href="$r_details">Details</a>
             </div>
         </div>
     </div>
@@ -84,42 +95,62 @@ end;
     }
 
     private function detailUtilisateur(){
+        $value1 = $this->objet->email;
+        $value2 = $this->objet->nom;
+        $value3 = $this->objet->message;
             return <<<end
 <div class="detailU">
-<div class="row">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/user/$this->objet->email.jpg>
+                <img src=/img/user/$value1.jpg>
             </div>
             <div class="card-content">
-                <p><b>$this->objet->nom</b></p>
+                <p><b>$value2</b></p>
+                <p>$value3</p>
             </div>
-            <div class="card-action">
-                <a href="#">Details</a>
+             <div class="card-action">
+                <a href="#">Ajouter cette personne à ma coloc'</a>
             </div>
         </div>
     </div>
 </div>
-<a class="waves-effect waves-light btn-large">Ajouter à ma coloc'</a>
+end;
+    }
+
+    private function detailLogement(){
+        $value1 = $this->objet->idLogement;
+        $value2 = $this->objet->places;
+        return <<<end
+<div class="detailU">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img src=/img/apart/$value1.jpg>
+            </div>
+            <div class="card-content">
+                <p><b>Nombre de places : $value2 personnes</b></p>
+            </div>
+            <div class="card-action">
+                <a href="#">Postuler pour ce logement</a>
+            </div>
+        </div>
+    </div>
 </div>
 end;
     }
 
-
-
-
-
-
-
-
     private function index(){
+        $app = \Slim\Slim::getInstance();
+        $r_inscription = $app->urlFor("inscription");
+        $r_connexion = $app->urlFor("identification");
+        $r_logements = $app->urlFor("logements");
         return <<<end
-<a class="waves-effect waves-light btn grey" href=""><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
+<a class="waves-effect waves-light btn grey" href="$r_logements"><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
 <div class="test">
-<img class ="img" src="img/logo.png " height ="40%" width = "40%">
+<img class ="img" src="/img/logo.png " height ="40%" width = "40%">
 <div class="row">
-    <form class="for" method="POST" action="$this->URI/inscription">
+    <form id="formulaire_inscription" class="for" method="POST" action="$r_inscription">
         <div class="row">
             <div class="input-field">
                 <input placeholder="ex : Dupont"  type="text" name="nom" required>
@@ -137,11 +168,14 @@ end;
                 <input placeholder="*********"  type="password" name="mdp2" required>
                 <label class="black-text">Confirmation du mot de passe</label>
             </div>
+            <div class="input-field">
+                <input placeholder="votre description"  type="text" name="message" required>
+                <label class="black-text">Une courte description de vous même</label>
+            </div>
         </div>
-        <button type="submit">Je m'inscris</button>
-        <a class="waves-effect waves-light btn green" href="">S'inscrire gratuitement</a>
+        <a id="boutton_inscription" class="waves-effect waves-light btn green">S'inscrire gratuitement</a>
     </form>
-    <form class="for">
+    <form id="formulaire_connexion" class="for" metho="POST" action="$r_connexion">
         <div class="row">
             <div class="input-field">
                 <input placeholder="ex : Dupont@gmail.com" type="text">
@@ -152,10 +186,18 @@ end;
                 <label class="black-text">Mot de passe</label>
             </div>
         </div>
-        <a class="waves-effect waves-light btn green" href="">Se connecter</a>
+        <a id="boutton_connexion" class="waves-effect waves-light btn green">Se connecter</a>
     </form>
 </div>
 </div>
+<script>
+    document.getElementById("boutton_inscription").onclick = function() {
+        document.getElementById("formulaire_inscription").submit();
+    }
+    document.getElementById("boutton_connexion").onclick = function() {
+        document.getElementById("formulaire_connexion").submit();
+    }
+</script>
 end;
     }
 }
