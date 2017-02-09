@@ -155,7 +155,7 @@ end;
 <a class="waves-effect waves-light btn grey" href="$r_logements"><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
 <div class="test">
 <img class ="img" src="/img/logo.png " height ="40%" width = "40%">
-    $mess<p>test test</p>
+    <p>erreur :$mess</p>
 <div class="row">
 
     <form id="formulaire_inscription" class="for" method="POST" action="$r_inscription">
