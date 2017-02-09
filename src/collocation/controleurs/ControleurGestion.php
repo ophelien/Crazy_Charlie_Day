@@ -95,4 +95,25 @@ class ControleurGestion
             $app->redirect("accueil");
         }
     }
+
+    public function validerGroupe(){
+        if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
+            $user = User::where("email","=",$_SESSION['email'])->first();
+            if($user->estGestionnaire()){ // deja gerant
+                $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe']);
+                $logement = Logement::where('idLogement','=',$groupe->idLogement);
+                if($groupe->idLogement != null){ //si le logement est bien affecté
+                    if($groupe->nbMembre()=== $logement->places){ // et si le logement a la taille exacte du groupe
+                       //noYetImplement
+                    }
+                }
+            }else{ // pas encore gerant
+                $app = \Slim\Slim::getInstance();
+                $app->redirect("accueil");
+            }
+        }else{ // utilisateur inconnu
+            $app = \Slim\Slim::getInstance();
+            $app->redirect("accueil");
+        }
+    }
 }
