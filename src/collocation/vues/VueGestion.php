@@ -52,7 +52,7 @@ class VueGestion
                 <p><b>Nombre de places : $value2 personnes</b></p>
             </div>
             <div class="card-action">
-                <a href="">Supprimer ce bien</a>
+                <a href="#">Supprimer ce bien</a>
             </div>
         </div>
     </div>
