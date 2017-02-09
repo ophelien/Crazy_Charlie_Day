@@ -24,8 +24,7 @@ class ControleurGestion
                 $appartient->email = $_SESSION['email'];
                 $appartient->idGroupe = $groupe->idGroupe;
                 $appartient->estOk = 1;
-                $gestion = preg_match("#.*^(?=.{8})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#", $_SESSION['email']);
-                $appartient->urlGestion = $gestion; // TODO
+                $appartient->urlGestion = $this->genererToken();
                 $appartient->save();
                 $_SESSION['idGroupe'] = $groupe->idGroupe;
                 $this->afficherGroupe();
@@ -133,6 +132,13 @@ class ControleurGestion
                     if($groupe->nbMembre()=== $logement->places){ // et si le logement a la taille exacte du groupe
                        $groupe->status=1;
                        $groupe->save();
+                        $appartients = Appartient::where("idGroupe","=",$_SESSION['idGroupe'])->get();
+                        foreach ($appartients as $appartient){
+                            if($appartient->email != $_SESSION['email']){
+                                $appartient->urlInvitation = $this->genererToken();
+                                $appartient->save();
+                            }
+                        }
                         $this->afficherGroupe(); // valider
                     }else{
                         $this->afficherGroupe();  // err : taille differente
