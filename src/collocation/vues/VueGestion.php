@@ -42,6 +42,7 @@ class VueGestion
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
+            <h2><b>Appartement ciblé : </b></h2>
                 <img src=/img/apart/$value1.jpg>
             </div>
             <div class="card-content">
@@ -55,6 +56,7 @@ end;
             foreach($this->objet[1] as $utilisateur){
                 $r_details = $app->urlFor("membre",array("email" => $utilisateur->email));
                 $retour .= <<<end
+                <h2><b>Personnes concernées : </b></h2>
 <div class="lis">
     <div class="col s12 m7">
         <div class="card">
