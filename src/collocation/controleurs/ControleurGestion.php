@@ -131,7 +131,7 @@ class ControleurGestion
                 $logement = Logement::where('idLogement','=',$groupe->idLogement)->first();
                 if($groupe->idLogement != null){ //si le logement est bien affecté
                     if($groupe->nbMembre()=== $logement->places){ // et si le logement a la taille exacte du groupe
-                       $groupe->status=2;
+                       $groupe->status=1;
                        $groupe->save();
                         $this->afficherGroupe(); // valider
                     }else{

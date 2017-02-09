@@ -8,6 +8,7 @@
 
 namespace collocation\vues;
 
+use collocation\models\Appartient;
 use \collocation\vues\VuePageHTML;
 
 class VueGestion
@@ -35,9 +36,6 @@ class VueGestion
             $retour= "";
             $app = \Slim\Slim::getInstance();
             $r_valider = $app->urlFor("validerGroupe",array("email" => $_SESSION['idGroupe']));
-            if($this->objet[3]){
-                $retour .= "<a href='$r_valider' id=\"boutton_connexion\" class=\"waves-effect waves-light btn green\">Valider</a>";
-            }
             if($this->objet[2] != null) {
                 $value1 = $this->objet[2]->idLogement;
                 $value2 = $this->objet[2]->places;
@@ -64,6 +62,20 @@ end;
             }
             foreach($this->objet[1] as $utilisateur){
                 $r_details = $app->urlFor("membre",array("email" => $utilisateur->email));
+                if($this->objet[0]->status > 0) {
+                    $ok = Appartient::where("email", "=", $utilisateur->email)->where("idGroupe", "=", $_SESSION['idGroupe'])->first();
+                    if($ok->estOk){
+                        $estOk = "<div class=\"card-content\"><p>Est d'accord</p></div>";
+                    }else{
+                        if($ok->estOk == null){
+                            $estOk = "<div class=\"card-content\"><p>Non renseigné</p></div>";
+                        }else {
+                            $estOk = "<div class=\"card-content\"><p>N'est pas d'accord</p></div>";
+                        }
+                    }
+                }else{
+                    $estOk = "";
+                }
                 $retour .= <<<end
                 
 <div class="lis">
@@ -75,6 +87,7 @@ end;
             <div class="card-content">
                 <p><b>$utilisateur->nom</b></p>
             </div>
+            $estOk
             <div class="card-action">
                 <a href="$r_details">Details</a>
             </div>
@@ -86,6 +99,9 @@ end;
     </div>
 </div>
 end;
+            }
+            if($this->objet[3] && $this->objet[0]->status == 0){ // pas encore validée
+                $retour .= "<a href='$r_valider' id=\"boutton_connexion\" class=\"waves-effect waves-light btn green\">Valider</a>";
             }
         return $retour;
     }
