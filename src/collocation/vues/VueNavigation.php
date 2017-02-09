@@ -140,12 +140,13 @@ end;
 end;
     }
 
-    private function index($error = null){
+    private function index(){
         $app = \Slim\Slim::getInstance();
         $r_inscription = $app->urlFor("inscription");
         $r_connexion = $app->urlFor("identification");
         $r_logements = $app->urlFor("logements");
         $mess = "";
+        $error = $this->objet;
         if($error != null){
             foreach($error as $value){
                 $mess .='<p class="red-text">' . $value . '<br></p>';
