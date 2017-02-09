@@ -49,6 +49,9 @@ class VueGestion
             <div class="card-content">
                 <p><b>Nombre de places : $value2 personnes</b></p>
             </div>
+            <div class="card-action">
+                <a href="">Supprimer ce bien</a>
+            </div>
         </div>
     </div>
 </div>
@@ -71,6 +74,10 @@ end;
             <div class="card-action">
                 <a href="$r_details">Details</a>
             </div>
+            <div class="card-action">
+                <a href="">Enlever de la coloc</a>
+            </div>
+            
         </div>
     </div>
 </div>
