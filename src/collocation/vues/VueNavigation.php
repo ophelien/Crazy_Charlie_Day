@@ -95,6 +95,8 @@ end;
     }
 
     private function detailUtilisateur(){
+        $app = \Slim\Slim::getInstance();
+        $r_ajouter = $app->urlFor("ajouterUser", array("email" => $this->objet->email));
         $value1 = $this->objet->email;
         $value2 = $this->objet->nom;
         $value3 = $this->objet->message;
@@ -110,7 +112,7 @@ end;
                 <p>$value3</p>
             </div>
              <div class="card-action">
-                <a href="#">Ajouter cette personne à ma coloc'</a>
+                <a href="$r_ajouter">Ajouter cette personne à ma coloc'</a>
             </div>
         </div>
     </div>
@@ -119,6 +121,8 @@ end;
     }
 
     private function detailLogement(){
+        $app = \Slim\Slim::getInstance();
+        $r_ajouter = $app->urlFor("ajouterLogement", array("id" => $this->objet->idLogement));
         $value1 = $this->objet->idLogement;
         $value2 = $this->objet->places;
         return <<<end
@@ -132,7 +136,7 @@ end;
                 <p><b>Nombre de places : $value2 personnes</b></p>
             </div>
             <div class="card-action">
-                <a href="#">Postuler pour ce logement</a>
+                <a href="$r_ajouter">Postuler pour ce logement</a>
             </div>
         </div>
     </div>

@@ -53,7 +53,15 @@ $app->get('/collocation/', function() {
 
 $app->get('/deconnexion/', function() {
     (new collocation\controleurs\ControleurNavigation())->deconnexion();
-})->name("deconnexion"); // TODO
+})->name("deconnexion");
+
+$app->get('/ajouterUser/:email', function($email) {
+    (new collocation\controleurs\ControleurGestion())->ajouterDansLeGroupe($email);
+})->name("ajouterUser");
+
+$app->get('/ajouterLogement/:id', function($id) {
+    (new collocation\controleurs\ControleurNavigation())->ajouterLogement($id);
+})->name("ajouterLogement");
 
 $app->get('/creerCollocation/', function() {
     (new collocation\controleurs\ControleurGestion())->creerGroupe();
