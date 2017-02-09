@@ -79,7 +79,7 @@ INSERT INTO `user` (`email`, `nom`, `message`) VALUES
 ('alexandre@gmail.com', 'Alexandre', ''),
 ('camille@gmail.com', 'Camille', ''),
 ('quentin@gmail.com', 'Quentin', ''),
-('marin@gmail.com', 'Marie', ''),
+('marie@gmail.com', 'Marie', ''),
 ('antoine@gmail.com', 'Antoine', ''),
 ('laura@gmail.com', 'Laura', ''),
 ('julien@gmail.com', 'Julien', ''),
