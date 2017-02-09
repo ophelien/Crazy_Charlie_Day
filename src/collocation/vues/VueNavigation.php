@@ -68,7 +68,7 @@ end;
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/apart/$logement->idlogement.jpg>
+                <img src=img/apart/$logement->idLogement.jpg>
             </div>
             <div class="card-content">
                 <p><b>Nombre de places : $logement->places personnes</b></p>
@@ -108,7 +108,28 @@ end;
     }
 
 
-
+    private function detailLogement(){
+        return <<<end
+<div class="detailU">
+<div class="row">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img src=img/user/$this->objet->idLogement.jpg>
+            </div>
+            <div class="card-content">
+                <p><b>Nombre de places : $this->objet->places personnes</b></p>
+            </div>
+            <div class="card-action">
+                <a href="#">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="waves-effect waves-light btn-large">Demander cette logement pour une coloc'</a>
+</div>
+end;
+    }
 
 
 
