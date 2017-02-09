@@ -99,7 +99,7 @@ class ControleurGestion
                 if($groupe->status==0){
                     if($groupe->idLogement != null) {
                         $logement = Logement::where('idlogement',"=",$groupe->idLogement)->first();
-                        if ($groupe->nbMembre() < $logement) {//si y a de la place dans le logement
+                        if ($groupe->nbMembre() < $logement->places) {//si y a de la place dans le logement
                             $appartient = new Appartient();
                             $appartient->email = $idGens;
                             $appartient->idGroupe = $_SESSION['idGroupe'];
@@ -107,6 +107,8 @@ class ControleurGestion
                             $appartient->urlGestion = null;
                             $appartient->save();
                             $this->afficherGroupe(VueGestion::AFF_AJOUT);
+                        }else{
+                            $this->afficherGroupe(VueGestion::AFF_ERR_LOGEMENT);
                         }
                     }else{
                         $appartient = new Appartient();
