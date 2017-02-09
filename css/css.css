@@ -26,4 +26,5 @@ html{
 form.for{
 	width : 45%;
 	display : inline-block;
+	vertical-align : middle;
 }
