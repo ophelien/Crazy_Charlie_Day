@@ -40,4 +40,11 @@ class ControleurNavigation
         print $vue-> render(VueNavigation::AFF_LISTE_UTILISATEUR);
     }
 
+    public function afficherListeLogement(){
+        $valeur = Logement::all();
+        $valeur = $valeur->where(places>1);
+        $vue = new VueNavigation($valeur);
+        print $vue -> render(VueNavigation::AFF_LISTE_LOGEMENT);
+    }
+
 }

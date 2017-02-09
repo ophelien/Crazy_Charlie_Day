@@ -6,6 +6,7 @@ class VueNavigation
 {
     const AFF_FORMULAIRE_LOGIN = 1;
     const AFF_LISTE_UTILISATEUR = 2;
+    const AFF_LISTE_LOGEMENT = 3;
 
     private $objet;
 
@@ -35,6 +36,18 @@ class VueNavigation
 <p>$utilisateur->nom</p>
 <a href="">Details</a>
 end;
+        }
+        return $retour;
+    }
+
+    private function listeLogement(){
+        $retour = "";
+        foreach($this->objet as $logement){
+            $retour.=<<<end
+<img src=$logement->idLogement.png>
+<p>Nombre de place(s): $logement->places</p>
+end;
+
         }
         return $retour;
     }
