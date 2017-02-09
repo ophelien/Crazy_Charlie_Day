@@ -27,7 +27,7 @@ class ControleurGestion
                 $appartient->urlGestion = $this->genererToken();
                 $appartient->save();
                 $_SESSION['idGroupe'] = $groupe->idGroupe;
-                $this->afficherGroupe();
+                $this->afficherGroupe(VueGestion::AFF_ERR);
             }
         }else{
             $app = \Slim\Slim::getInstance();
@@ -50,7 +50,7 @@ class ControleurGestion
                 }
                 $users = $groupe->users();
                 $vue = new VueGestion(array($groupe,$users,$lieu,$possible));
-                print $vue-> render(VueGestion::AFF_GROUPE);  // NOT YET IMPLEMENTED
+                print $vue-> render(VueGestion::AFF_ERR);  // NOT YET IMPLEMENTED
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
                 $app->redirect($app->urlFor("accueil"));
@@ -76,7 +76,7 @@ class ControleurGestion
                             $appartient->estOk = 0;
                             $appartient->urlGestion = null;
                             $appartient->save();
-                            $this->afficherGroupe();
+                            $this->afficherGroupe(VueGestion::AFF_AJOUT);
                         }
                     }else{
                         $appartient = new Appartient();
@@ -85,7 +85,7 @@ class ControleurGestion
                         $appartient->estOk = 0;
                         $appartient->urlGestion = null;
                         $appartient->save();
-                        $this->afficherGroupe();
+                        $this->afficherGroupe(VueGestion::AFF_ERR_AJOUT);
                     }
                 }
             }else{ // pas encore gerant
@@ -105,13 +105,13 @@ class ControleurGestion
                 $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe'])->first();
                 if($groupe->status==0){
                     $place = Logement::where('idLogement','=',$idlogem)->first();
-                    $grp = Groupe::where('idLogement','=',$idlogem)->first();
-                    if($grp == null && $place->places >= $groupe->nbMembre()){ // si le logement n'est pas déjà attribué et s'il y a assez de places
+                    if($place->places >= $groupe->nbMembre()){ // s'il y a assez de places
                         $groupe->idLogement = $idlogem;
                         $groupe->save();
+                        $this->afficherGroupe(VueGestion::STATUS);
                     }
                 }
-                $this->afficherGroupe();
+                $this->afficherGroupe(VueGestion::AFF_ERR_STATUS);
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
                 $app->redirect($app->urlFor("accueil"));
@@ -139,12 +139,12 @@ class ControleurGestion
                                 $appartient->save();
                             }
                         }
-                        $this->afficherGroupe(); // valider
+                        $this->afficherGroupe(VueGestion::AFF_LOGEMENT); // valider
                     }else{
-                        $this->afficherGroupe();  // err : taille differente
+                        $this->afficherGroupe(VueGestion::AFF_ERR_LOGEMENT);  // err : taille differente
                     }
                 }else{
-                    $this->afficherGroupe(); // err : aucun logement
+                    $this->afficherGroupe(VueGestion::AFF_ERR_NO_LOGEMENT); // err : aucun logement
                 }
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();

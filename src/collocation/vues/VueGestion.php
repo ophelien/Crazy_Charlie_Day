@@ -13,7 +13,15 @@ use \collocation\vues\VuePageHTML;
 
 class VueGestion
 {
-    const AFF_GROUPE = 1;
+    const AFF_ERR = 1;
+    const AFF_CREATION = 2;
+    const AFF_AJOUT = 3;
+    const AFF_ERR_AJOUT = 4;
+    const AFF_ERR_STATUS = 5;
+    const AFF_STATUS = 6;
+    const AFF_ERR_LOGEMENT = 7;
+    const AFF_LOGEMENT = 8;
+    const AFF_ERR_NO_LOGEMENT = 9;
 
     private $objet;
 
@@ -22,13 +30,39 @@ class VueGestion
         $this->objet =$array;
     }
 
-    public function render($selecteur)
+    public function render($selecteur = null)
     {
+        $content = "";
         switch ($selecteur) {
-            case VueGestion::AFF_GROUPE :
-                $content = $this->afficherGroupe();
+            case VueGestion::AFF_ERR :
+                $content .= "<div class='err'>Erreur : le logement choisi n'est pas assez grand</div>";
+                break;
+            case VueGestion::AFF_CREATION :
+                $content .= "<div class='message'>Le groupe a bien été créé</div>";
+                break;
+            case VueGestion::AFF_AJOUT :
+                $content .= "<div class='message'>Le membre a bien été ajouté au groupe</div>";
+                break;
+            case VueGestion::AFF_ERR_AJOUT :
+                $content .= "<div class='err'>Le membre n'a pas été ajouté au groupe</div>";
+                break;
+            case VueGestion::AFF_ERR_STATUS :
+                $content .= "<div class='err'>Le groupe à déjà un logement</div>";
+                break;
+            case VueGestion::AFF_STATUS :
+                $content .= "<div class='message'>Le groupe possède un nouveau logement</div>";
+                break;
+            case VueGestion::AFF_ERR_LOGEMENT :
+                $content .= "<div class='err'>Le logement n'a pas assez de place</div>";
+                break;
+            case VueGestion::AFF_LOGEMENT :
+                $content .= "<div class='message'>Le logement a assez de place</div>";
+                break;
+            case VueGestion::AFF_ERR_NO_LOGEMENT :
+                $content .= "<div class='err'>Il n'y a pas de logement</div>";
                 break;
         }
+        $content .= $this->afficherGroupe();
         return VuePageHTML::getHeaders().VuePageHTML::getMenu(). $content . VuePageHTML::getFooter();
     }
 
