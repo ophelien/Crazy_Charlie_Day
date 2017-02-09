@@ -82,6 +82,10 @@ class VueGestion
                 $value1 = $this->objet[2]->idLogement;
                 $value2 = $this->objet[2]->places;
                 $r_supprimerBien = $app->urlFor("supprimerLogementColloc");
+                $suppressionTxtBien = "";
+                if($this->objet[0]->status == 0) {
+                    $suppressionTxtBien = "<div class=\"card-action\"><a href=\"$r_supprimerBien\">Supprimer ce bien</a></div>";
+                }
                 $retour .= <<<end
                 <h4><b>Appartement ciblé :</b></h4>
 <div class="detailU">
@@ -94,15 +98,14 @@ class VueGestion
             <div class="card-content">
                 <p><b>Nombre de places : $value2 personnes</b></p>
             </div>
-            <div class="card-action">
-                <a href="$r_supprimerBien">Supprimer ce bien</a>
-            </div>
+            $suppressionTxtBien
         </div>
     </div>
 </div>
 <h4><b>Personnes concernées : </b></h4>
 end;
             }
+            $suppressionTxt = "";
             foreach($this->objet[1] as $utilisateur){
                 $r_supprimer = $app->urlFor("supprimerUserColloc",array("email" => $utilisateur->email));
                 $r_details = $app->urlFor("membre",array("email" => $utilisateur->email));
@@ -120,6 +123,9 @@ end;
                     }
                 }else{
                     $estOk = "";
+                    if($utilisateur->email == $_SESSION['email']) {
+                        $suppressionTxt = "<div class=\"card-action\"><a href=\"$r_supprimer\">Enlever de la coloc</a></div>";
+                    }
                 }
                 $retour .= <<<end
                 
@@ -136,9 +142,7 @@ end;
             <div class="card-action">
                 <a href="$r_details">Details</a>
             </div>
-            <div class="card-action">
-                <a href="$r_supprimer">Enlever de la coloc</a>
-            </div>
+            $suppressionTxt
             $lien
         </div>
     </div>
@@ -158,6 +162,12 @@ end;
             }
             if($this->objet[3] && $this->objet[0]->status == 0){ // pas encore validée
                 $retour .= "<a href='$r_valider' id=\"boutton_connexion\" class=\"waves-effect waves-light btn green\">Valider</a>";
+            }
+            if($this->objet[0]->status == 3){
+                $retour .= "<div>Collocation validée</div>";
+            }
+            if($this->objet[0]->status == 4){
+                $retour .= "<div>Collocation refusée</div>";
             }
         return $retour;
     }

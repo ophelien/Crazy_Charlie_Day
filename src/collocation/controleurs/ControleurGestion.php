@@ -7,9 +7,38 @@ use \collocation\models\Groupe;
 use collocation\models\Logement;
 use \collocation\models\User;
 use \collocation\vues\VueGestion;
+use collocation\vues\VueInvitation;
+use Illuminate\Support\Facades\App;
 
 class ControleurGestion
 {
+    public function invitation($url){
+        $appartient = Appartient::where("urlInvitation","=",$url);
+        if($appartient != null) {
+            $user = User::where("email","=",$appartient->email);
+            $_SESSION['invitation'] = $user->email;
+            $_SESSION['invitationValide'] = $appartient->estOk;
+            $this->afficherInvitation();
+        }else {
+            print "aucun coffret";
+        }
+    }
+
+    public function afficherInvitation(){
+        if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
+                $groupe = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
+                $lieu = Logement::where("idLogement","=",$groupe->idLogement)->first();
+
+                $users = $groupe->users();
+                $vue = new VueInvitation(array($groupe,$users,$lieu));
+                print $vue-> render();
+            }else{ // pas encore gerant
+                $app = \Slim\Slim::getInstance();
+                $app->redirect($app->urlFor("accueil"));
+            }
+
+    }
+
     public function creerGroupe(){
         if(isset($_SESSION['email'])) { // utilisateur connu
             $user = User::where("email", "=", $_SESSION['email'])->first();
