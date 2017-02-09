@@ -26,6 +26,9 @@ class VueNavigation
             case VueNavigation::AFF_LISTE_UTILISATEUR :
                 $content = $this->listeUtilisateur();
                 break;
+            case VueNavigation::AFF_LISTE_LOGEMENT :
+                $content = $this->listeLogement();
+                break;
         }
         return VuePageHTML::getHeaders().$content.VuePageHTML::getFooter();
     }

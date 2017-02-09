@@ -4,6 +4,7 @@ namespace collocation\controleurs;
 
 use \collocation\vues\VueNavigation;
 use \collocation\models\User;
+use \collocation\models\Logement;
 
 class ControleurNavigation
 {
