@@ -98,7 +98,10 @@ class ControleurNavigation
         }
 
         if ($_POST['mail']!=''){
-            if(filter_var( $_POST['mail'], FILTER_VALIDATE_EMAIL)){
+            $user = User::where("email","=",$_POST['mail'])->first();
+            if($user != null){
+                array_push($error, "Le mail indiqué est déjà utilisé");
+            }else if(filter_var( $_POST['mail'], FILTER_VALIDATE_EMAIL)){
                 $mail = filter_var($_POST['mail'], FILTER_SANITIZE_EMAIL);
             }else{
                 array_push($error, "Le mail indiqué est invalide, veuillez le changer.");
