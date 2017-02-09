@@ -168,6 +168,10 @@ end;
                 <input placeholder="*********"  type="password" name="mdp2" required>
                 <label class="black-text">Confirmation du mot de passe</label>
             </div>
+            <div class="input-field">
+                <input placeholder="votre description"  type="text" name="message" required>
+                <label class="black-text">Une courte description de vous même</label>
+            </div>
         </div>
         <a id="boutton_inscription" class="waves-effect waves-light btn green">S'inscrire gratuitement</a>
     </form>
