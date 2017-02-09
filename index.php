@@ -19,6 +19,10 @@ $app->get('/', function(){
     (new collocation\controleurs\ControleurNavigation())->index();
 })->name("accueil");
 
+$app->post('/inscription/', function(){
+    (new collocation\controleurs\ControleurNavigation())->inscription();
+});
+
 $app->get('/identification/', function() {
     (new collocation\controleurs\ControleurNavigation())->saisirLogin();
 })->name("identification");
