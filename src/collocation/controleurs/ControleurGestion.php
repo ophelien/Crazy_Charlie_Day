@@ -22,7 +22,7 @@ class ControleurGestion
             $groupe = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
             $lieu = Logement::where("idLogement","=",$groupe->idLogement)->first();
 
-            $users = $groupe->users();
+            $users = $groupe->user();
             $vue = new VueInvitation(array($groupe,$users,$lieu));
             print $vue-> render();
         }else {
