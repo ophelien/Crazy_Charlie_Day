@@ -51,4 +51,25 @@ class ControleurGestion
         }
     }
 
+    public function ajouterDansLeGroupe($gens){
+        if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
+            $user = User::where("email","=",$_SESSION['email'])->first();
+            if($user->estGestionnaire()){ // deja gerant
+                $groupe = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
+                $logement = Logement::select("places")->where('idlogement',"=","$groupe->idLogement")->get();
+                if($groupe->nbMembre() < $logement){//si y a de la place dans le logement
+                    $appartient = new Appartient();
+                    $appartient->idUser = $gens->id;
+                    $appartient ->idGroupe = $_SESSION['idGroupe'];
+                    $appartient->save();
+                }
+            }else{ // pas encore gerant
+                $app = \Slim\Slim::getInstance();
+                $app->redirect("accueil");
+            }
+        }else{ // utilisateur inconnu
+            $app = \Slim\Slim::getInstance();
+            $app->redirect("accueil");
+        }
+    }
 }
