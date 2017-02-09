@@ -18,7 +18,16 @@ class VueGestionnaire
         $this->objet =$array;
     }
 
-    private function afficherGroupe(){
+    private function afficherTousLesGroupe(){
+        $app = \Slim\Slim::getInstance();
+        $retour = "";
+        foreach($this->objet as $groupe){
+            $retour .= <<<end
+<p>$groupe->idGroupe</p>
+<p>$groupe->idLogement</p>
+end;
 
+        }
+        return $retour;
     }
 }
