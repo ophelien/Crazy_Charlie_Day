@@ -79,6 +79,9 @@ end;
 </div>
 end;
         }
+        if($_SESSION['invitationValide'] == null){
+            $retour .= "<a href='$r_valider' id=\"boutton_connexion\" class=\"waves-effect waves-light btn green\">Valider</a>";
+        }
         if($this->objet[0]->status == 3){
             $retour .= "<div>Collocation validée</div>";
         }
