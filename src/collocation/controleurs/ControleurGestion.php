@@ -97,8 +97,8 @@ class ControleurGestion
             if($user->estGestionnaire()){ // deja gerant
                 $groupe = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
                 if($groupe->status==0){
-                    $logement = Logement::where('idlogement',"=","$groupe->idLogement")->first();
-                    if($logement != null) {
+                    if($groupe->idLogement != null) {
+                        $logement = Logement::where('idlogement',"=",$groupe->idLogement)->first();
                         if ($groupe->nbMembre() < $logement) {//si y a de la place dans le logement
                             $appartient = new Appartient();
                             $appartient->email = $idGens;
