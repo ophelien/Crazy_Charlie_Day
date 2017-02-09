@@ -119,6 +119,9 @@ class ControleurNavigation
         }
 
         if (sizeof ( $error ) == 0){
+            print $_SERVER['REQUEST_URI'];
+            //copy("sql.sql","sql.jpg");
+            copy("./img/user/defaut.jpg","./img/user/$mail.jpg");
             $mdp = password_hash($mdp, PASSWORD_DEFAULT, Array('cost' => 12));
             $u = new User();
             $u->email = $mail;
@@ -129,7 +132,7 @@ class ControleurNavigation
 
             $_SESSION['email'] = $mail;
 
-            $this->afficherListeLogement();
+           $this->afficherListeLogement();
         }else{
             $vue = new VueNavigation($error);
             print $vue->render(VueNavigation::AFF_INDEX);
