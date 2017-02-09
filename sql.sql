@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `logement` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `email` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `nom` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `message` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   PRIMARY KEY (`email`)
