@@ -84,27 +84,30 @@ class ControleurNavigation
                 array_push($error, "Les mots de passe indiqués sont différents, veuillez les modifier.");
             }
         }else{
-            array_push($error, "Veuillez entrez un mot de passe.");
+            array_push($error, "Veuillez entrer un mot de passe.");
         }
 
-        if (isset($_POST['nom'])){
+        if ($_POST['nom'] !=''){
             if($_POST['nom'] == filter_var($_POST['nom'], FILTER_SANITIZE_STRING)){
                 $nom = filter_var($_POST['nom'], FILTER_SANITIZE_STRING);
             }else{
                 array_push($error, "Le nom indiqué est invalide, veuillez le modifier.");
             }
         }else{
-            array_push($error, "Veuillez entrez un nom.");
+            array_push($error, "Veuillez entrer un nom.");
         }
 
-        if (isset($_POST['mail'])){
-            if(filter_var( $_POST['mail'], FILTER_VALIDATE_EMAIL)){
+        if ($_POST['mail']!=''){
+            $user = User::where("email","=",$_POST['mail'])->first();
+            if($user != null){
+                array_push($error, "Le mail indiqué est déjà utilisé");
+            }else if(filter_var( $_POST['mail'], FILTER_VALIDATE_EMAIL)){
                 $mail = filter_var($_POST['mail'], FILTER_SANITIZE_EMAIL);
             }else{
                 array_push($error, "Le mail indiqué est invalide, veuillez le changer.");
             }
         }else{
-            array_push($error, "Le mail indiqué est invalide, veuillez le changer.");
+            array_push($error, "Veuillez entrer un mail.");
         }
 
         if(isset($_POST['message'])){

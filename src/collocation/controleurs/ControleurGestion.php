@@ -63,14 +63,25 @@ class ControleurGestion
             if($user->estGestionnaire()){ // deja gerant
                 $groupe = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
                 if($groupe->status==0){
-                    $logement = Logement::select("places")->where('idlogement',"=","$groupe->idLogement")->get();
-                    if($groupe->nbMembre() < $logement){//si y a de la place dans le logement
+                    $logement = Logement::where('idlogement',"=","$groupe->idLogement")->first();
+                    if($logement != null) {
+                        if ($groupe->nbMembre() < $logement) {//si y a de la place dans le logement
+                            $appartient = new Appartient();
+                            $appartient->email = $idGens;
+                            $appartient->idGroupe = $_SESSION['idGroupe'];
+                            $appartient->estOk = 0;
+                            $appartient->urlGestion = null;
+                            $appartient->save();
+                            $this->afficherGroupe();
+                        }
+                    }else{
                         $appartient = new Appartient();
                         $appartient->email = $idGens;
-                        $appartient ->idGroupe = $_SESSION['idGroupe'];
+                        $appartient->idGroupe = $_SESSION['idGroupe'];
                         $appartient->estOk = 0;
                         $appartient->urlGestion = null;
                         $appartient->save();
+                        $this->afficherGroupe();
                     }
                 }
             }else{ // pas encore gerant

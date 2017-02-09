@@ -18,6 +18,6 @@ class Groupe extends \Illuminate\Database\Eloquent\Model {
 
     public function nbMembre(){
         $appartiens = Appartient::all();
-        return $appartiens.lengths;
+        return sizeof($appartiens);
     }
 }
