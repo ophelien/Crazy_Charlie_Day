@@ -19,10 +19,10 @@ class ControleurGestion
             $_SESSION['invitation'] = $user->email;
             $_SESSION['invitationId'] = $appartient->id;
             $_SESSION['invitationValide'] = $appartient->estOk;
-            $groupe = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
+            $groupe = Groupe::where("idGroupe","=",$appartient->idGroupe)->first();
             $lieu = Logement::where("idLogement","=",$groupe->idLogement)->first();
 
-            $users = $groupe->user();
+            $users = $groupe->users();
             $vue = new VueInvitation(array($groupe,$users,$lieu));
             print $vue-> render();
         }else {
