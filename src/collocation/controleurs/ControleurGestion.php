@@ -27,7 +27,7 @@ class ControleurGestion
                 $appartient->urlGestion = $this->genererToken();
                 $appartient->save();
                 $_SESSION['idGroupe'] = $groupe->idGroupe;
-                $this->afficherGroupe(VueGestion::AFF_ERR);
+                //$this->afficherGroupe(VueGestion::AFF_ERR);
             }
         }else{
             $app = \Slim\Slim::getInstance();
@@ -129,7 +129,7 @@ class ControleurGestion
                 $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe'])->first();
                 $logement = Logement::where('idLogement','=',$groupe->idLogement)->first();
                 if($groupe->idLogement != null){ //si le logement est bien affecté
-                    if($groupe->nbMembre()=== $logement->places){ // et si le logement a la taille exacte du groupe
+                    if($groupe->nbMembre()== $logement->places){ // et si le logement a la taille exacte du groupe
                        $groupe->status=1;
                        $groupe->save();
                         $appartients = Appartient::where("idGroupe","=",$_SESSION['idGroupe'])->get();
