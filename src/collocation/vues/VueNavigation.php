@@ -140,16 +140,24 @@ end;
 end;
     }
 
-    private function index(){
+    private function index($error = null){
         $app = \Slim\Slim::getInstance();
         $r_inscription = $app->urlFor("inscription");
         $r_connexion = $app->urlFor("identification");
         $r_logements = $app->urlFor("logements");
+        $mess = "";
+        if($error != null){
+            foreach($error as $value){
+                $mess .='<p class="red-text">' . $value . '<br></p>';
+            }
+        }
         return <<<end
 <a class="waves-effect waves-light btn grey" href="$r_logements"><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
 <div class="test">
 <img class ="img" src="/img/logo.png " height ="40%" width = "40%">
+    <p>erreur :$mess</p>
 <div class="row">
+
     <form id="formulaire_inscription" class="for" method="POST" action="$r_inscription">
         <div class="row">
             <div class="input-field">

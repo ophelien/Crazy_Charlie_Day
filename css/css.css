@@ -37,14 +37,23 @@ form.for{
 }
 
 div.menu{
-	background-color : green;
+	padding : 2%;
+	background-color : rgba(0,110,0,0.5);
 	padding-bottom : 1%;
 }
+
+img.imgmenu{
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width : 20%;
+}
+
 
 a.btn-large{
 	background-color : white;
 	color : green;
-	width : 15%;
+	width : 20%;
 }
 
 div.detailU{
