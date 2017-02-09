@@ -5,6 +5,7 @@ namespace collocation\controleurs;
 use collocation\models\Appartient;
 use \collocation\vues\VueNavigation;
 use \collocation\models\User;
+use \collocation\models\Groupe;
 use \collocation\models\Logement;
 use Illuminate\Support\Facades\App;
 
