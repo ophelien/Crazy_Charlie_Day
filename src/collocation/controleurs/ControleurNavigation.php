@@ -2,9 +2,11 @@
 
 namespace collocation\controleurs;
 
+use collocation\models\Appartient;
 use \collocation\vues\VueNavigation;
 use \collocation\models\User;
 use \collocation\models\Logement;
+use Illuminate\Support\Facades\App;
 
 class ControleurNavigation
 {
@@ -144,6 +146,10 @@ class ControleurNavigation
             if($_POST['mdpCon'] == filter_var($_POST['mdpCon'], FILTER_SANITIZE_STRING)){
                 if(password_verify($_POST['mdpCon'], $user->mdp)){
                     $_SESSION['email'] = $user->email;
+                    $appartient = Appartient::where("email","=",$user->email)->whereNotNull("urlGestion")->first();
+                    if($appartient != null){
+                        $_SESSION['idGroupe'] = $appartient->idGroupe;
+                    }
                 }else{
                     array_push($error, "Mot de passe incorrect");
                 }
