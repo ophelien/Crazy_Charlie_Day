@@ -65,7 +65,7 @@ end;
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/apart/$logement->idlogement.png>
+                <img src=img/apart/$logement->idlogement.jpg>
             </div>
             <div class="card-content">
                 <p><b>Nombre de places : $logement->places personnes</b></p>
