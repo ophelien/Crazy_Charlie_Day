@@ -100,6 +100,10 @@ end;
         $value1 = $this->objet->email;
         $value2 = $this->objet->nom;
         $value3 = $this->objet->message;
+        $postuler = "";
+        if(isset($_SESSION['idGroupe'])){
+            $postuler = "<div class=\"card-action\"><a href=\"$r_ajouter\">Ajouter cette personne à ma coloc'</a></div>";
+        }
             return <<<end
 <div class="detailU">
     <div class="col s12 m7">
@@ -111,9 +115,7 @@ end;
                 <p><b>$value2</b></p>
                 <p>$value3</p>
             </div>
-             <div class="card-action">
-                <a href="$r_ajouter">Ajouter cette personne à ma coloc'</a>
-            </div>
+            $postuler
         </div>
     </div>
 </div>
@@ -123,6 +125,10 @@ end;
     private function detailLogement(){
         $app = \Slim\Slim::getInstance();
         $r_ajouter = $app->urlFor("ajouterLogement", array("id" => $this->objet->idLogement));
+        $postuler = "";
+        if(isset($_SESSION['idGroupe'])){
+            $postuler = "<div class=\"card-action\"><a href=\"$r_ajouter\">Postuler pour ce logement</a></div>";
+        }
         $value1 = $this->objet->idLogement;
         $value2 = $this->objet->places;
         return <<<end
@@ -135,9 +141,7 @@ end;
             <div class="card-content">
                 <p><b>Nombre de places : $value2 personnes</b></p>
             </div>
-            <div class="card-action">
-                <a href="$r_ajouter">Postuler pour ce logement</a>
-            </div>
+            $postuler
         </div>
     </div>
 </div>
