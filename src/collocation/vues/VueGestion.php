@@ -38,7 +38,7 @@ class VueGestion
                 $value1 = $this->objet[2]->idLogement;
                 $value2 = $this->objet[2]->places;
                 $retour .= <<<end
-                <p><b>Appartement ciblé :</b></p>
+                <h4><b>Appartement ciblé :</b></h4>
 <div class="detailU">
     <div class="col s12 m7">
         <div class="card">
@@ -47,12 +47,12 @@ class VueGestion
                 <img src=/img/apart/$value1.jpg>
             </div>
             <div class="card-content">
-                <h3><b>Nombre de places : $value2 personnes</b></h3>
+                <p><b>Nombre de places : $value2 personnes</b></p>
             </div>
         </div>
     </div>
 </div>
-<h3><b>Personnes concernées : </b></h3>
+<h4><b>Personnes concernées : </b></h4>
 end;
             }
             foreach($this->objet[1] as $utilisateur){
