@@ -117,6 +117,9 @@ class ControleurGestion
                         $appartient->save();
                         $this->afficherGroupe(VueGestion::AFF_AJOUT);
                     }
+                }else{
+                    $app = \Slim\Slim::getInstance();
+                    $app->redirect($app->urlFor("accueil"));
                 }
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
@@ -139,9 +142,12 @@ class ControleurGestion
                         $groupe->idLogement = $idlogem;
                         $groupe->save();
                         $this->afficherGroupe(VueGestion::AFF_STATUS);
+                    }else{
+                        $this->afficherGroupe(VueGestion::AFF_ERR_LOGEMENT);
                     }
+                }else {
+                    $this->afficherGroupe(VueGestion::AFF_ERR_STATUS);
                 }
-                $this->afficherGroupe(VueGestion::AFF_ERR_STATUS);
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
                 $app->redirect($app->urlFor("accueil"));
