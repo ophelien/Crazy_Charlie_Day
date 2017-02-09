@@ -18,7 +18,7 @@ div.row{
 
 html{
 
-	background:url(stan.jpg)no-repeat center center fixed;
+	background:url(/img/stan.jpg)no-repeat center center fixed;
 	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
 	background-size: cover;
 }

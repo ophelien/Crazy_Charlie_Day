@@ -17,13 +17,13 @@ $app = new \Slim\Slim;
 
 $app->get('/', function(){
     $html = <<<END
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		 <link rel="stylesheet" href="css.css">
+		 <link rel="stylesheet" href="css/css.css">
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
          <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>           
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script> 
@@ -31,43 +31,59 @@ $app->get('/', function(){
         
     </head>
 <body>
-<header>
+<a class="waves-effect waves-light btn grey" href=""><i class="material-icons right">trending_flat</i>Parcourir le site sans se connecter </a>
 
-         <div class="Un toit partage pour tous">
-        <h1><b>TITRE</b></h1>
-        <a class="waves-effect waves-light btn-large grey" href="">blablabla</a>
-        <a class="waves-effect waves-light btn-large grey" href="">blablabla</a>
-        <a class="waves-effect waves-light btn-large grey" href="">Se connecter<a>
-        <a class="waves-effect waves-light btn-large grey" href="">Inscription</a>
-        </div>  
+<div class="test">
 
-</header>
+<img class ="img" src="img/logo.png " height ="40%" width = "40%">
+<div class="row">
 
 
-        <footer class="page-footer grey">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">titre du footer</h5>
-                <p class="grey-text text-lighten-4">blablablablablablablablablablablablablablablab</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Liens</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Liens 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Liens 2</a></li>
-                </ul>
-              </div>
+
+    <form class="for">
+        <div class="row">
+            <div class="input-field">
+                <input placeholder="ex : Dupont"  type="text">
+                <label class="black-text">Nom d'utilisateur</label>
             </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2017 Copyright
-           </div>
-          </div>
-        </footer>
- 
-</body>  
+            <div class="input-field">
+                <input placeholder="ex : Dupont@gmail.com" type="text">
+                <label class="black-text">Adresse mail</label>
+            </div>
+            <div class="input-field">
+                <input placeholder="*********"  type="password">
+                <label class="black-text">Mot de passe</label>
+            </div>
+            <div class="input-field">
+                <input placeholder="*********"  type="password">
+                <label class="black-text">Confirmation du mot de passe</label>
+            </div>
+        </div>
+        <a class="waves-effect waves-light btn green" href="">S'inscrire gratuitement</a>
+    </form>
+
+
+    <form class="for">
+        <div class="row">
+            <div class="input-field">
+                <input placeholder="ex : Dupont@gmail.com" type="text">
+                <label class="black-text">Adresse mail</label>
+            </div>
+            <div class="input-field">
+                <input placeholder="*********"  type="password">
+                <label class="black-text">Mot de passe</label>
+            </div>
+        </div>
+        <a class="waves-effect waves-light btn green" href="">Se connecter</a>
+    </form>
+
+
+</div>
+</div>
+
+
+
+</body>
 </html>
 
 END;
