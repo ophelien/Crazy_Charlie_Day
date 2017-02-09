@@ -172,5 +172,6 @@ class ControleurGestion
 
     public function supprimerUser($emailUser){
         Appartient::where('email', '=', $emailUser)->where('idGroupe','=',$_SESSION['idGroupe'])->delete();
+        $this->afficherGroupe(VueGestion::AFF_SUPPRESSION_USER);
     }
 }
