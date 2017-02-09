@@ -170,7 +170,6 @@ class ControleurGestion
     }
 
     public function supprimerUser($emailUser){
-        $appart = Appartient::where('email', '=', $emailUser)->where('idGroupe','=',$_SESSION['idGroupe'])->first();
-        $appart->delete();
+        $appart = Appartient::where('email', '=', $emailUser)->where('idGroupe','=',$_SESSION['idGroupe'])->delete();
     }
 }
