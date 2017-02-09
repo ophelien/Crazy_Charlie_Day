@@ -69,4 +69,23 @@ class ControleurGestion
             $app->redirect("accueil");
         }
     }
+
+    public function ajouterLogement($logement){
+        if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
+            $user = User::where("email","=",$_SESSION['email'])->first();
+            if($user->estGestionnaire()){ // deja gerant
+                $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe']);
+                $logement = $groupe->idLogement;
+                if($logement == null){
+                    $groupe->idLogement = $logement->idLogement;
+                }
+            }else{ // pas encore gerant
+                $app = \Slim\Slim::getInstance();
+                $app->redirect("accueil");
+            }
+        }else{ // utilisateur inconnu
+            $app = \Slim\Slim::getInstance();
+            $app->redirect("accueil");
+        }
+    }
 }
