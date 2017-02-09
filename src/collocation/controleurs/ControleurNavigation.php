@@ -5,7 +5,7 @@ namespace collocation\controleurs;
 use \collocation\vues\VueNavigation;
 use \collocation\models\User;
 
-class Navigation
+class ControleurNavigation
 {
 
     public function saisirLogin(){

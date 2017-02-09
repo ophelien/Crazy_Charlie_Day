@@ -1,8 +1,8 @@
 <?php
 
-namespace collocation\controleur;
+namespace collocation\controleurs;
 
-class Gestion
+class ControleurGestion
 {
 
 }

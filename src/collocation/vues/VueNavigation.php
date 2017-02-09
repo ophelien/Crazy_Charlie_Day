@@ -9,7 +9,7 @@ class VueNavigation
 
     private $objet;
 
-    public function __construct($array)
+    public function __construct($array = null)
     {
         $this->objet =$array;
     }

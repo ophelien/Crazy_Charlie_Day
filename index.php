@@ -16,7 +16,6 @@ require 'vendor/autoload.php';
 $app = new \Slim\Slim;
 
 $app->get('/', function(){
-    $URI = \Slim\Slim::getInstance()->request->getRootUri();
     $html = <<<END
     <!DOCTYPE html>
 <html>
@@ -34,7 +33,7 @@ $app->get('/', function(){
 <body>
 <header>
 
-         <div class="titre">
+         <div class="Un toit partage pour tous">
         <h1><b>TITRE</b></h1>
         <a class="waves-effect waves-light btn-large grey" href="">blablabla</a>
         <a class="waves-effect waves-light btn-large grey" href="">blablabla</a>
@@ -74,6 +73,22 @@ $app->get('/', function(){
 END;
 
 echo $html;
+})->name("accueil");
+
+$app->get('/accueil/', function() {
+    (new collocation\controleurs\ControleurNavigation())->saisirLogin();
+});
+
+$app->post('/', function() {
+    (new \collocation\controleurs\ControleurNavigation())->connexion();
+})->name("connexion");
+
+$app->get('/utilisateur/', function() {
+    (new collocation\controleurs\ControleurNavigation())->afficherListeUtilisateurs();
+});
+
+$app->get('/utilisateur/:email', function($email) {
+    (new collocation\controleurs\ControleurNavigation())->saisirLogin();
 });
 
 $app->run();
