@@ -82,18 +82,16 @@ end;
     }
 
     private function detailUtilisateur(){
-        $retour = "";
-        foreach($this->objet as $utilisateur){
-            $retour .= <<<end
+            return <<<end
 <div class="detailU">
 <div class="row">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
-                <img src=img/user/$utilisateur->email.jpg>
+                <img src=img/user/$this->objet->email.jpg>
             </div>
             <div class="card-content">
-                <p><b>$utilisateur->nom</b></p>
+                <p><b>$this->objet->nom</b></p>
             </div>
             <div class="card-action">
                 <a href="#">Details</a>
@@ -104,9 +102,14 @@ end;
 <a class="waves-effect waves-light btn-large">Ajouter à ma coloc'</a>
 </div>
 end;
-        }
-        return $retour;
     }
+
+
+
+
+
+
+
 
     private function index(){
         return <<<end
