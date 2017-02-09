@@ -173,4 +173,21 @@ class ControleurGestion
     public function supprimerUser($emailUser){
         Appartient::where('email', '=', $emailUser)->where('idGroupe','=',$_SESSION['idGroupe'])->delete();
     }
+
+    public function listerLogementCompatible(){
+        if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
+            $user = User::where("email","=",$_SESSION['email'])->first();
+            if($user->estGestionnaire()){ // deja gerant
+               $app=Appartient::where('email','=',$user->email)->first();
+               $groupe=Groupe::where('idGroupe','=',$app->idgroupe())->first;
+               $log=Logement::where('places','=',$groupe->nbMembre());
+            }else{ // pas encore gerant
+                $app = \Slim\Slim::getInstance();
+                $app->redirect($app->urlFor("accueil"));
+            }
+        }else{ // utilisateur inconnu
+            $app = \Slim\Slim::getInstance();
+            $app->redirect($app->urlFor("accueil"));
+        }
+    }
 }
