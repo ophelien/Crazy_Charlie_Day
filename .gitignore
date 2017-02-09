@@ -1,5 +1,4 @@
 .idea
 .htaccess
-.idea/*
 src/conf/*.ini
 vendor/*
