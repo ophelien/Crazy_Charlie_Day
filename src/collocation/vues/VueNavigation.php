@@ -101,7 +101,6 @@ end;
         $value2 = $this->objet->nom;
             return <<<end
 <div class="detailU">
-<div class="row">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
@@ -111,7 +110,6 @@ end;
                 <p><b>$value2</b></p>
             </div>
         </div>
-    </div>
 </div>
 <a class="waves-effect waves-light btn-large">Ajouter à ma coloc'</a>
 </div>
@@ -124,7 +122,6 @@ end;
         $value2 = $this->objet->places;
         return <<<end
 <div class="detailU">
-<div class="row">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
@@ -137,7 +134,6 @@ end;
                 <a href="#">Details</a>
             </div>
         </div>
-    </div>
 </div>
 <a class="waves-effect waves-light btn-large">Demander cette logement pour une coloc'</a>
 </div>
