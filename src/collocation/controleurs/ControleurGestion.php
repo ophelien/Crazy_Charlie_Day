@@ -43,13 +43,18 @@ class ControleurGestion
                 $groupe = Groupe::where("idGroupe","=",$_SESSION['idGroupe'])->first();
                 if($groupe->idLogement != null){$lieu = Logement::where("idLogement","=",$groupe->idLogement)->first();}
                 else{$lieu = null;}
+                $possible = false;
+                if($groupe->idLogement != null){ //si le logement est bien affecté
+                    if($groupe->nbMembre()=== $lieu->places){ // et si le logement a la taille exacte du groupe
+                        $possible = true;
+                    }
+                }
                 $users = $groupe->users();
-                $vue = new VueGestion(array($groupe,$users,$lieu));
+                $vue = new VueGestion(array($groupe,$users,$lieu,$possible));
                 print $vue-> render(VueGestion::AFF_GROUPE);  // NOT YET IMPLEMENTED
             }else{ // pas encore gerant
-               // $app = \Slim\Slim::getInstance();
-                //$app->redirect($app->urlFor("accueil"));
-                print $user->estGestionnaire()." -- ";
+                $app = \Slim\Slim::getInstance();
+                $app->redirect($app->urlFor("accueil"));
             }
         }else{ // utilisateur inconnu
             $app = \Slim\Slim::getInstance();
@@ -86,11 +91,11 @@ class ControleurGestion
                 }
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
-                $app->redirect("accueil");
+                $app->redirect($app->urlFor("accueil"));
             }
         }else{ // utilisateur inconnu
             $app = \Slim\Slim::getInstance();
-            $app->redirect("accueil");
+            $app->redirect($app->urlFor("accueil"));
         }
     }
 
@@ -102,7 +107,7 @@ class ControleurGestion
                 if($groupe->status==0){
                     $place = Logement::where('idLogement','=',$idlogem)->first();
                     $grp = Groupe::where('idLogement','=',$idlogem)->first();
-                    if($grp == null && $place->places == $groupe->nbMembre()){ // si le logement n'est pas déjà attribué et s'il y a assez de places
+                    if($grp == null && $place->places >= $groupe->nbMembre()){ // si le logement n'est pas déjà attribué et s'il y a assez de places
                         $groupe->idLogement = $idlogem;
                         $groupe->save();
                     }
@@ -110,11 +115,11 @@ class ControleurGestion
                 $this->afficherGroupe();
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
-                $app->redirect("accueil");
+                $app->redirect($app->urlFor("accueil"));
             }
         }else{ // utilisateur inconnu
             $app = \Slim\Slim::getInstance();
-            $app->redirect("accueil");
+            $app->redirect($app->urlFor("accueil"));
         }
     }
 
@@ -122,21 +127,26 @@ class ControleurGestion
         if(isset($_SESSION['email']) && isset($_SESSION['idGroupe'])){ // utilisateur connu
             $user = User::where("email","=",$_SESSION['email'])->first();
             if($user->estGestionnaire()){ // deja gerant
-                $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe']);
-                $logement = Logement::where('idLogement','=',$groupe->idLogement);
+                $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe'])->first();
+                $logement = Logement::where('idLogement','=',$groupe->idLogement)->first();
                 if($groupe->idLogement != null){ //si le logement est bien affecté
                     if($groupe->nbMembre()=== $logement->places){ // et si le logement a la taille exacte du groupe
                        $groupe->status=2;
                        $groupe->save();
+                        $this->afficherGroupe(); // valider
+                    }else{
+                        $this->afficherGroupe();  // err : taille differente
                     }
+                }else{
+                    $this->afficherGroupe(); // err : aucun logement
                 }
             }else{ // pas encore gerant
                 $app = \Slim\Slim::getInstance();
-                $app->redirect("accueil");
+                $app->redirect($app->urlFor("accueil"));
             }
         }else{ // utilisateur inconnu
             $app = \Slim\Slim::getInstance();
-            $app->redirect("accueil");
+            $app->redirect($app->urlFor("accueil"));
         }
     }
 

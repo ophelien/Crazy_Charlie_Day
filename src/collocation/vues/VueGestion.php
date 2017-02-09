@@ -34,6 +34,10 @@ class VueGestion
         private function afficherGroupe(){
             $retour= "";
             $app = \Slim\Slim::getInstance();
+            $r_valider = $app->urlFor("validerGroupe",array("email" => $_SESSION['idGroupe']));
+            if($this->objet[3]){
+                $retour .= "<a href='$r_valider' id=\"boutton_connexion\" class=\"waves-effect waves-light btn green\">Valider</a>";
+            }
             if($this->objet[2] != null) {
                 $value1 = $this->objet[2]->idLogement;
                 $value2 = $this->objet[2]->places;
