@@ -79,6 +79,14 @@ $app->get('/invitation/:invitation', function($invitation) {
     (new collocation\controleurs\ControleurGestion())->invitation($invitation);
 })->name("invitation");
 
+$app->get('/refuserInvitation/', function() {
+    (new collocation\controleurs\ControleurGestion())->repondreInvitation(0);
+})->name("refuserInvitation");
+
+$app->get('/accepterInvitation/', function() {
+    (new collocation\controleurs\ControleurGestion())->repondreInvitation(1);
+})->name("accepterInvitation");
+
 $app->get('/supprimerUserColloc/:email', function($email) {
     (new collocation\controleurs\ControleurGestion())->supprimerUser($email);
 })->name("supprimerUserColloc");

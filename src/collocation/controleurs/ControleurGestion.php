@@ -17,9 +17,21 @@ class ControleurGestion
         if($appartient != null && !isset($_SESSION['email'])) {
             $user = User::where("email","=",$appartient->email);
             $_SESSION['invitation'] = $user->email;
+            $_SESSION['invitationId'] = $appartient->id;
             $_SESSION['invitationValide'] = $appartient->estOk;
             $this->afficherInvitation();
         }else {
+            $app = \Slim\Slim::getInstance();
+            $app->redirect($app->urlFor("accueil"));
+        }
+    }
+
+    public function repondreInvitation($reponse){
+        if(isset($_SESSION['invitationId'])&&isset($_SESSION['invitationValide'])){
+            $appartient = Appartient::find($_SESSION['invitationId']);
+            $appartient->estOk = $reponse;
+            $appartient->save();
+        }else{
             $app = \Slim\Slim::getInstance();
             $app->redirect($app->urlFor("accueil"));
         }
