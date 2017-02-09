@@ -11,5 +11,14 @@ namespace collocation\vues;
 
 class VueGestionnaire
 {
+    private $objet;
 
+    public function __construct($array = null)
+    {
+        $this->objet =$array;
+    }
+
+    private function afficherGroupe(){
+
+    }
 }

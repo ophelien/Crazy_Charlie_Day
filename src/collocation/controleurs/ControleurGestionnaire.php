@@ -14,7 +14,7 @@ class ControleurGestionnaire
 
     public function afficherTousLesGroupesComplets(){
         if(isset($_SESSION['admin'])) { //si l'admin est vérifié
-            $groupe = Groupe::where('status','=',1)->get();
+            $groupe = Groupe::where('status','=',2)->get();
         }else{ // si l'admin est inconnu
 
         }
