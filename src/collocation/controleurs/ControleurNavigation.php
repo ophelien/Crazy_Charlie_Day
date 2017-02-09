@@ -129,8 +129,7 @@ class ControleurNavigation
 
             $_SESSION['email'] = $mail;
 
-            $vue = new VueNavigation();
-            print $vue->render(VueNavigation::AFF_LISTE_LOGEMENT);
+            $this->afficherListeLogement();
         }else{
             $vue = new VueNavigation($error);
             print $vue->render(VueNavigation::AFF_INDEX);
