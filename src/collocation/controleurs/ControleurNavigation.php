@@ -8,9 +8,30 @@ use \collocation\models\User;
 class Navigation
 {
 
-    public function saisiLogin(){
+    public function saisirLogin(){
         $vue = new VueNavigation();
         print $vue->render(VueNavigation::AFF_FORMULAIRE_LOGIN);
+    }
+
+    public function connexion(){
+        $app =  \Slim\Slim::getInstance();
+        $requete = $app->request;
+        $password = filter_var($requete->post("mdp"),FILTER_SANITIZE_SPECIAL_CHARS);
+        $email = filter_var($requete->post("email"),FILTER_SANITIZE_SPECIAL_CHARS);
+        $user = User::where("email","=",$email)->first();
+        if($user != null) {
+            if (password_verify($password, $user->mdp)) {
+                $_SESSION['email'] = $user->email;
+                // CONNEXION OK
+                print "connection ok";
+            } else {
+                // ERREUR MDP FAUX
+                print "mdp faux";
+            }
+        }else{
+           // ERREUR LOGIN INCONNU
+            print "login inconnu";
+        }
     }
 
     public function afficherListeUtilisateurs(){

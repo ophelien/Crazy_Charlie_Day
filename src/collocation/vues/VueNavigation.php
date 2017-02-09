@@ -38,4 +38,19 @@ end;
         }
         return $retour;
     }
+
+    private function formulaire(){
+        $app = \Slim\Slim::getInstance();
+        $c_form = $app->urlFor("connexion");
+        return <<<END
+<form method="post" action="$c_form">
+<fieldset>
+    <legend>Saisir vos identifiants</legend>
+    <input name="nom" type="text" required placeholder="<Nom>"/>
+    <input name="mdp" type="password" required placeholder="<Mot de passe>"/>
+</fieldset>
+<input type="submit" value="Connexion"/>
+</form>
+END;
+    }
 }
