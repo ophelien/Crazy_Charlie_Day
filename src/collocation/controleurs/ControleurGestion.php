@@ -9,12 +9,12 @@ use \collocation\models\User;
 class ControleurGestion
 {
     public function creerGroupe(){
-        if(isset($_SESSION['email'])){ // utilisateur connu
-            $user = User::where("email","=",$_SESSION['email'])->first();
-            if($user->estGestionnaire()){ // deja gerant
+        if(isset($_SESSION['email'])) { // utilisateur connu
+            $user = User::where("email", "=", $_SESSION['email'])->first();
+            if ($user->estGestionnaire()) { // deja gerant
                 $app = \Slim\Slim::getInstance();
                 $app->redirect($app->urlFor("accueil"));
-            }else{ // pas encore gerant
+            } else { // pas encore gerant
                 $groupe = new Groupe();
                 $groupe->status = 0;
                 $groupe->save();
@@ -27,9 +27,6 @@ class ControleurGestion
                 $_SESSION['idGroupe'] = $groupe->idGroupe;
                 $this->afficherGroupe();
             }
-        }else{ // utilisateur inconnu
-            $app = \Slim\Slim::getInstance();
-            $app->redirect($app->urlFor("accueil"));
         }
     }
 
