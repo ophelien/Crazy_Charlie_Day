@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `groupe` (
 );
 
 CREATE TABLE IF NOT EXISTS `appartient` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `idGroupe` int(11) NOT NULL,
   `urlInvitation` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
@@ -32,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `appartient` (
   `estOk` int(1) NOT NULL DEFAULT 0,
   CONSTRAINT FK_appartient_groupe FOREIGN KEY (idGroupe) REFERENCES `groupe`(idGroupe),
   CONSTRAINT FK_appartient_user FOREIGN KEY (email) REFERENCES `user`(email),
-  PRIMARY KEY (`email`,`idGroupe`)
+  PRIMARY KEY (`id`)
 );
 
 INSERT INTO `logement` (`idLogement`, `places`) VALUES
