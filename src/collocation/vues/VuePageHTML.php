@@ -51,10 +51,14 @@ end;
             $connexion = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_accueil\">Connexion</a>";
         }
 
-        if(isset($_SESSION['idGroupe'])){
-            $groupe = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_aff_coloc\">Ma coloc'</a>";
-        }else{
-            $groupe = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_creer_coloc\">Créer colloc'</a>";
+        if(isset($_SESSION['admin'])){
+            $groupe = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_creer_coloc\">Pannel admin</a>";
+        }else {
+            if (isset($_SESSION['idGroupe'])) {
+                $groupe = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_aff_coloc\">Ma coloc'</a>";
+            } else {
+                $groupe = "<a class=\"waves-effect waves-light btn-large\" href=\"$r_creer_coloc\">Créer colloc'</a>";
+            }
         }
 
         return <<<end
