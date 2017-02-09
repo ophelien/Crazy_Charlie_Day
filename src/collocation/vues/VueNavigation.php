@@ -28,13 +28,27 @@ class VueNavigation
         return $content;
     }
 
+
     private function listeUtilisateur(){
         $retour = "";
         foreach($this->objet as $utilisateur){
             $retour .= <<<end
-<img src=$utilisateur->email.png>
-<p>$utilisateur->nom</p>
-<a href="">Details</a>
+<div class="row">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img src=$utilisateur->email.png>
+            </div>
+            <div class="card-content">
+                <p><b>$utilisateur->nom</b></p>
+            </div>
+            <div class="card-action">
+                <a href="#">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+<img >
 end;
         }
         return $retour;
@@ -47,7 +61,6 @@ end;
 <img src="$logement->idLogement">
 <p>Nombre de place(s): $logement->places</p>
 end;
-
         }
         return $retour;
     }
