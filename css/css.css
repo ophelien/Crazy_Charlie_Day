@@ -13,7 +13,8 @@ body{
 }
 
 div.row{
-	width : 65%;
+	display : inline-block;
+	width : 33%;
 }
 
 html{
