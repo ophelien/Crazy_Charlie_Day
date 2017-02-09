@@ -11,5 +11,7 @@ namespace collocation\models;
 
 class Gestionnaire
 {
-
+    protected $table = "admin";
+    protected $primaryKey = "admin";
+    public $timestamps = false;
 }
