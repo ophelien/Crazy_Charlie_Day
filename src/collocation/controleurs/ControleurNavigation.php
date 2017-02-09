@@ -52,4 +52,10 @@ class ControleurNavigation
         print $vue -> render(VueNavigation::AFF_LISTE_LOGEMENT);
     }
 
+    public function afficherLogement($idlogement){
+        $valeur = Logement::where("idLogement","=",$idlogement)->first();
+        $vue = new VueNavigation($valeur);
+        //print $vue-> render(VueNavigation::AFF_LOGEMENT);  // NOT YET IMPLEMENTED
+    }
+
 }
