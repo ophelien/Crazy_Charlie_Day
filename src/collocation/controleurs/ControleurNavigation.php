@@ -23,6 +23,9 @@ class ControleurNavigation
         if(isset($_SESSION['email'])){
             unset($_SESSION['email']);
         }
+        if(isset($_SESSION['admin'])){
+            unset($_SESSION['admin']);
+        }
         $app =  \Slim\Slim::getInstance();
         $app->redirect($app->urlFor("accueil"));
     }
