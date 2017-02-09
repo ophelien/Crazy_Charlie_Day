@@ -22,6 +22,7 @@ class VueGestion
     const AFF_ERR_LOGEMENT = 7;
     const AFF_LOGEMENT = 8;
     const AFF_ERR_NO_LOGEMENT = 9;
+    const AFF_SUPPRESSION_LOGEMENT = 10;
 
     private $objet;
 

@@ -1,12 +1,6 @@
 
 /*!40101 SET NAMES utf8 */;
 
-CREATE TABLE IF NOT EXISTS `admin` (
-  `admin` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`admin`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
-
 CREATE TABLE IF NOT EXISTS `logement` (
   `idLogement` int(11) NOT NULL AUTO_INCREMENT,
   `places` int(11) NOT NULL,
@@ -18,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `mdp` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `nom` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `message` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `admin` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 

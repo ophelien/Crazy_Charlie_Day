@@ -167,9 +167,10 @@ class ControleurGestion
         $groupe = Groupe::where('idGroupe','=',$_SESSION['idGroupe'])->first();
         $groupe->idLogement = null;
         $groupe->save();
+        $this->afficherGroupe(VueGestion::AFF_SUPPRESSION_LOGEMENT);
     }
 
     public function supprimerUser($emailUser){
-        $appart = Appartient::where('email', '=', $emailUser)->where('idGroupe','=',$_SESSION['idGroupe'])->delete();
+        Appartient::where('email', '=', $emailUser)->where('idGroupe','=',$_SESSION['idGroupe'])->delete();
     }
 }
